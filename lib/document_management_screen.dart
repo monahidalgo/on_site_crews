@@ -1,43 +1,45 @@
 import 'package:flutter/material.dart';
 
 class DocumentManagementScreen extends StatelessWidget {
+  const DocumentManagementScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Document Management'),
+        title: const Text('Document Management'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Document Management Screen'),
       ),
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         notchMargin: 6.0,
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.home),
+              icon: const Icon(Icons.home),
               onPressed: () {
                 Navigator.pushNamed(context, '/home');
               },
             ),
             IconButton(
-              icon: Icon(Icons.notifications),
+              icon: const Icon(Icons.notifications),
               onPressed: () {
                 Navigator.pushNamed(context, '/notifications');
               },
             ),
-            SizedBox(width: 48), // Space for the floating action button
+            const SizedBox(width: 48), // Space for the floating action button
             IconButton(
-              icon: Icon(Icons.chat),
+              icon: const Icon(Icons.chat),
               onPressed: () {
                 Navigator.pushNamed(context, '/chat');
               },
             ),
             IconButton(
-              icon: Icon(Icons.account_circle),
+              icon: const Icon(Icons.account_circle),
               onPressed: () {
                 Navigator.pushNamed(context, '/profile');
               },
@@ -49,8 +51,8 @@ class DocumentManagementScreen extends StatelessWidget {
         onPressed: () {
           // Action for the floating button
         },
-        child: Icon(Icons.add),
         tooltip: 'Add Document',
+        child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:on_site_crews/notifications_screen.dart';
 import 'package:on_site_crews/time_cards_screen.dart';
 import 'gallery_screen.dart';
@@ -26,11 +27,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
       initialRoute: '/login', // Start with the login screen
       routes: {
         '/login': (context) => LoginScreen(), // Route for the login screen
         '/create_account': (context) => const CreateAccountScreen(),
-        '/dashboard': (context) => DashboardScreen(),
+        '/dashboard': (context) => const DashboardScreen(),
         '/create_project': (context) => const CreateProjectScreen(),
         '/manage_tasks': (context) => const TaskManagementScreen(),
         '/add_task': (context) => const AddTaskScreen(),
@@ -40,9 +42,7 @@ class MyApp extends StatelessWidget {
         '/profile': (context) => const ProfileScreen(),
         '/time_cards': (context) => const TimeCardsScreen(),
         '/gallery': (context) => const GalleryScreen(),
-
       },
     );
   }
 }
-

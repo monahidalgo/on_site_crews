@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
-class DashboardScreen extends StatelessWidget{
+class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Project Tools'),
+        title: const Text('On-Site Crews'),
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
+            const DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
@@ -36,43 +37,50 @@ class DashboardScreen extends StatelessWidget{
               ),
             ),
             ListTile(
-              leading: Icon(Icons.photo),
-              title: Text('Photos'),
+              leading: const Icon(Icons.photo),
+              title: const Text('Photos'),
               onTap: () {
                 Navigator.pushNamed(context, '/photos');
               },
             ),
             ListTile(
-              leading: Icon(Icons.attach_file),
-              title: Text('Files'),
+              leading: const Icon(Icons.attach_file),
+              title: const Text('Files'),
               onTap: () {
                 Navigator.pushNamed(context, '/files');
               },
             ),
             ListTile(
-              leading: Icon(Icons.group),
-              title: Text('Crews'),
+              leading: const Icon(Icons.group),
+              title: const Text('Crews'),
               onTap: () {
                 Navigator.pushNamed(context, '/crews');
               },
             ),
             ListTile(
-              leading: Icon(Icons.report),
-              title: Text('Project Reports'),
+              leading: const Icon(Icons.report),
+              title: const Text('Project Reports'),
               onTap: () {
                 Navigator.pushNamed(context, '/project_reports');
               },
             ),
             ListTile(
-              leading: Icon(Icons.receipt),
-              title: Text('Invoices'),
+              leading: const Icon(Icons.receipt),
+              title: const Text('Invoices'),
               onTap: () {
                 Navigator.pushNamed(context, '/invoices');
               },
             ),
             ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('Logout'),
+              leading: const Icon(Icons.chat),
+              title: const Text('Chats'),
+              onTap: () {
+                Navigator.pushNamed(context, '/chats');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
               onTap: () {
                 Navigator.pushNamed(context, '/login');
               },
@@ -81,23 +89,23 @@ class DashboardScreen extends StatelessWidget{
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Project Tools',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               GridView.count(
                 crossAxisCount: 2,
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   _buildDashboardBox(context, 'Time-cards', Icons.access_time, Colors.orange, '/time_cards'),
                   _buildDashboardBox(context, 'Gallery', Icons.photo, Colors.green, '/gallery'),
@@ -105,12 +113,22 @@ class DashboardScreen extends StatelessWidget{
                   _buildDashboardBox(context, 'Reports', Icons.report, Colors.purple, '/reports'),
                   _buildDashboardBox(context, 'Invoices', Icons.receipt, Colors.red, '/invoices'),
                   _buildDashboardBox(context, 'Crews', Icons.group, Colors.teal, '/crews'),
+                  _buildDashboardBox(context, 'Chats', Icons.chat, Colors.amber, '/chats'),
+                  _buildDashboardBox(context, 'Photos', Icons.photo_album, Colors.pink, '/photos'),
                 ],
               ),
             ],
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/create_project');
+        },
+        tooltip: 'Create Project',
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 
@@ -120,12 +138,12 @@ class DashboardScreen extends StatelessWidget{
         Navigator.pushNamed(context, route);
       },
       child: Container(
-        margin: EdgeInsets.all(8.0),
-        padding: EdgeInsets.all(16.0),
+        margin: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0), // Smaller padding to reduce size
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(8.0),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black12,
               blurRadius: 4.0,
@@ -136,13 +154,13 @@ class DashboardScreen extends StatelessWidget{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 48, color: Colors.white),
-            SizedBox(height: 10),
+            Icon(icon, size: 40, color: Colors.white), // Smaller icon size
+            const SizedBox(height: 8),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -152,4 +170,3 @@ class DashboardScreen extends StatelessWidget{
     );
   }
 }
-
