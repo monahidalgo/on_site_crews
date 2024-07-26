@@ -9,14 +9,12 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white, // Change the background color to white
       body: Stack(
         fit: StackFit.expand,
         children: [
           // Background image
-          Image.asset(
-            'assets/images/bkg.png',
-            fit: BoxFit.cover, // Add this line
-          ),
+
           // Content
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -29,7 +27,8 @@ class LoginScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          margin: const EdgeInsets.only(bottom: 10.0),
+                          margin: const EdgeInsets.symmetric(vertical: 40.0), // Lower the logo
+                          alignment: Alignment.center,
                           child: Image.asset('assets/images/onsitelogin.jpeg'), // Logo image
                         ),
                         TextFormField(
@@ -50,21 +49,50 @@ class LoginScreen extends StatelessWidget {
                               Navigator.pushNamed(context, '/dashboard');
                             }
                           },
-                          child: const Text('Login'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.deepOrange,
+                          ),
+                          child: Text(
+                            'Login',
+                            style: TextStyle(color: Colors.white), // Change the color of the Login button text to white
+                          ),
                         ),
                         const SizedBox(height: 10.0),
                         TextButton(
                           onPressed: () {
                             Navigator.pushNamed(context, '/forgot_password');
                           },
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.deepOrange, // Change the color of the Forgot Password button
+                          ),
                           child: const Text("Forgot Password?"),
                         ),
                         const SizedBox(height: 10.0),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/create_account');
-                          },
-                          child: const Text("Don't have an account? Create Account"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Don't have an account? ",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/create_account');
+                              },
+                              child: const Text(
+                                "Create Account",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.deepOrange,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
