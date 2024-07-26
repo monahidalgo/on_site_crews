@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 
 class EmployeeManagementScreen extends StatelessWidget {
+  const EmployeeManagementScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Manage Employees'),
+        title: const Text('Manage Employees'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Employee Management Screen'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Navigate to Add Employee Screen
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

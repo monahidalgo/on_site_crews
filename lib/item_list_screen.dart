@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 
 class ItemListScreen extends StatelessWidget {
+  const ItemListScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Item List'),
+        title: const Text('Item List'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Item List Screen'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Navigate to Add Item Screen
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

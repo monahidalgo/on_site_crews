@@ -1,12 +1,4 @@
 import 'package:flutter/material.dart';
-import 'create_project_screen.dart';
-import 'contractor_management_screen.dart';
-import 'owner_management_screen.dart';
-import 'employee_management_screen.dart';
-import 'crew_management_screen.dart';
-import 'item_list_screen.dart';
-import 'login_screen.dart';
-import 'profile_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   @override
@@ -20,116 +12,131 @@ class DashboardScreen extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
+              child: Text('Profile'),
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundImage: AssetImage('assets/profile_image.png'), // Placeholder for profile image
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'User Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Text(
-                    'user@example.com',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
             ),
             ListTile(
-              leading: Icon(Icons.person),
-              title: Text('Profile'),
+              leading: Icon(Icons.photo),
+              title: Text('Photos'),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ProfileScreen()),
-                );
+                // Handle photos tap
               },
             ),
+            ListTile(
+              leading: Icon(Icons.file_copy),
+              title: Text('Files'),
+              onTap: () {
+                // Handle files tap
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.group),
+              title: Text('Crews'),
+              onTap: () {
+                // Handle crews tap
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.report),
+              title: Text('Project Reports'),
+              onTap: () {
+                // Handle project reports tap
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.receipt),
+              title: Text('Invoices'),
+              onTap: () {
+                // Handle invoices tap
+              },
+            ),
+            Divider(),
             ListTile(
               leading: Icon(Icons.logout),
               title: Text('Logout'),
               onTap: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
-                      (route) => false,
-                );
+                Navigator.pushReplacementNamed(context, '/');
               },
             ),
           ],
         ),
       ),
-      body: ListView(
-        children: [
-          ListTile(
-            title: Text('Manage Projects'),
+      body: GridView.count(
+        crossAxisCount: 2,
+        children: <Widget>[
+          GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CreateProjectScreen()),
-              );
+              Navigator.pushNamed(context, '/time_cards');
             },
+            child: Card(
+              child: Center(
+                child: Text('Time-cards'),
+              ),
+            ),
           ),
-          ListTile(
-            title: Text('Manage Contractors'),
+          GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ContractorManagementScreen()),
-              );
+              Navigator.pushNamed(context, '/gallery');
             },
+            child: Card(
+              child: Center(
+                child: Text('Gallery'),
+              ),
+            ),
           ),
-          ListTile(
-            title: Text('Manage Owners'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => OwnerManagementScreen()),
-              );
-            },
-          ),
-          ListTile(
-            title: Text('Manage Employees'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => EmployeeManagementScreen()),
-              );
-            },
-          ),
-          ListTile(
-            title: Text('Manage Crews'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CrewManagementScreen()),
-              );
-            },
-          ),
-          ListTile(
-            title: Text('Item List'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ItemListScreen()),
-              );
-            },
-          ),
+          // Add more cards as needed
         ],
       ),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 6.0,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {
+                Navigator.pushNamed(context, '/dashboard');
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.chat),
+              onPressed: () {
+                Navigator.pushNamed(context, '/chat');
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.assignment),
+              onPressed: () {
+                Navigator.pushNamed(context, '/manage_tasks');
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.notifications),
+              onPressed: () {
+                Navigator.pushNamed(context, '/notifications');
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.person),
+              onPressed: () {
+                Navigator.pushNamed(context, '/profile');
+              },
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/create_project');
+        },
+        tooltip: 'Create Project',
+        child: Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }

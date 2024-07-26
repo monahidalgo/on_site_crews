@@ -45,7 +45,7 @@ At this time, the project is not seeking collaborators.
 
 ## Contact
 For inquiries or to discuss mobile app development needs, please reach out:
-- **Email**: monaego@live.com
+- **Email**: monaego@outlook.com
 - **LinkedIn**: Mona Hidalgo
 - **Twitter**: @MonaHidalgo1
 

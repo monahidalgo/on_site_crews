@@ -1,5 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:on_site_crews/notifications_screen.dart';
+import 'package:on_site_crews/time_cards_screen.dart';
+import 'gallery_screen.dart';
 import 'login_screen.dart';
+import 'create_account_screen.dart';
+import 'dashboard_screen.dart';
+import 'create_project_screen.dart';
+import 'task_management_screen.dart';
+import 'add_task_screen.dart';
+import 'chat_screen.dart';
+import 'document_management_screen.dart';
+import 'profile_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +24,23 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      initialRoute: '/login', // Start with the login screen
+      routes: {
+        '/login': (context) => LoginScreen(), // Route for the login screen
+        '/create_account': (context) => CreateAccountScreen(),
+        '/dashboard': (context) => DashboardScreen(),
+        '/create_project': (context) => CreateProjectScreen(),
+        '/manage_tasks': (context) => TaskManagementScreen(),
+        '/add_task': (context) => AddTaskScreen(),
+        '/project_chat': (context) => ChatScreen(),
+        '/document_management': (context) => DocumentManagementScreen(),
+        '/notifications_screen': (context) => NotificationsScreen(),
+        '/profile': (context) => ProfileScreen(),
+        '/time_cards': (context) => TimeCardsScreen(),
+        '/gallery': (context) => GalleryScreen(),
+
+      },
     );
   }
 }
+
