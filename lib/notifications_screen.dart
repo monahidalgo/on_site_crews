@@ -2,50 +2,48 @@ import 'package:flutter/material.dart';
 
 
 class NotificationsScreen extends StatelessWidget {
-  const NotificationsScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: Text('Profile'),
       ),
-      body: const Center(
+      body: Center(
         child: Text('Profile Screen'),
       ),
       bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
+        shape: CircularNotchedRectangle(),
         notchMargin: 6.0,
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             IconButton(
-              icon: const Icon(Icons.home),
+              icon: Icon(Icons.home),
               onPressed: () {
                 Navigator.pushNamed(context, '/dashboard');
               },
             ),
             IconButton(
-              icon: const Icon(Icons.chat),
+              icon: Icon(Icons.chat),
               onPressed: () {
                 Navigator.pushNamed(context, '/chat');
               },
             ),
             IconButton(
-              icon: const Icon(Icons.assignment),
+              icon: Icon(Icons.assignment),
               onPressed: () {
                 Navigator.pushNamed(context, '/manage_tasks');
               },
             ),
             IconButton(
-              icon: const Icon(Icons.notifications),
+              icon: Icon(Icons.notifications),
               onPressed: () {
                 Navigator.pushNamed(context, '/notifications');
               },
             ),
             IconButton(
-              icon: const Icon(Icons.person),
+              icon: Icon(Icons.person),
               onPressed: () {
                 Navigator.pushNamed(context, '/profile');
               },
