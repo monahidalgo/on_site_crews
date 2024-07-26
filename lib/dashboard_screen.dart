@@ -1,142 +1,155 @@
 import 'package:flutter/material.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatelessWidget{
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard'),
+        title: Text('Project Tools'),
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Profile'),
               decoration: BoxDecoration(
                 color: Colors.blue,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundImage: AssetImage('assets/profile_image.png'),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Mona Hidalgo',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
             ListTile(
               leading: Icon(Icons.photo),
               title: Text('Photos'),
               onTap: () {
-                // Handle photos tap
+                Navigator.pushNamed(context, '/photos');
               },
             ),
             ListTile(
-              leading: Icon(Icons.file_copy),
+              leading: Icon(Icons.attach_file),
               title: Text('Files'),
               onTap: () {
-                // Handle files tap
+                Navigator.pushNamed(context, '/files');
               },
             ),
             ListTile(
               leading: Icon(Icons.group),
               title: Text('Crews'),
               onTap: () {
-                // Handle crews tap
+                Navigator.pushNamed(context, '/crews');
               },
             ),
             ListTile(
               leading: Icon(Icons.report),
               title: Text('Project Reports'),
               onTap: () {
-                // Handle project reports tap
+                Navigator.pushNamed(context, '/project_reports');
               },
             ),
             ListTile(
               leading: Icon(Icons.receipt),
               title: Text('Invoices'),
               onTap: () {
-                // Handle invoices tap
+                Navigator.pushNamed(context, '/invoices');
               },
             ),
-            Divider(),
             ListTile(
               leading: Icon(Icons.logout),
               title: Text('Logout'),
               onTap: () {
-                Navigator.pushReplacementNamed(context, '/');
+                Navigator.pushNamed(context, '/login');
               },
             ),
           ],
         ),
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, '/time_cards');
-            },
-            child: Card(
-              child: Center(
-                child: Text('Time-cards'),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Project Tools',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, '/gallery');
-            },
-            child: Card(
-              child: Center(
-                child: Text('Gallery'),
+              SizedBox(height: 20),
+              GridView.count(
+                crossAxisCount: 2,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  _buildDashboardBox(context, 'Time-cards', Icons.access_time, Colors.orange, '/time_cards'),
+                  _buildDashboardBox(context, 'Gallery', Icons.photo, Colors.green, '/gallery'),
+                  _buildDashboardBox(context, 'Tasks', Icons.assignment, Colors.blue, '/tasks'),
+                  _buildDashboardBox(context, 'Reports', Icons.report, Colors.purple, '/reports'),
+                  _buildDashboardBox(context, 'Invoices', Icons.receipt, Colors.red, '/invoices'),
+                  _buildDashboardBox(context, 'Crews', Icons.group, Colors.teal, '/crews'),
+                ],
               ),
-            ),
+            ],
           ),
-          // Add more cards as needed
-        ],
+        ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 6.0,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.home),
-              onPressed: () {
-                Navigator.pushNamed(context, '/dashboard');
-              },
+    );
+  }
+
+  Widget _buildDashboardBox(BuildContext context, String title, IconData icon, Color color, String route) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, route);
+      },
+      child: Container(
+        margin: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(8.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 4.0,
+              spreadRadius: 1.0,
             ),
-            IconButton(
-              icon: Icon(Icons.chat),
-              onPressed: () {
-                Navigator.pushNamed(context, '/chat');
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.assignment),
-              onPressed: () {
-                Navigator.pushNamed(context, '/manage_tasks');
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.notifications),
-              onPressed: () {
-                Navigator.pushNamed(context, '/notifications');
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.person),
-              onPressed: () {
-                Navigator.pushNamed(context, '/profile');
-              },
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 48, color: Colors.white),
+            SizedBox(height: 10),
+            Text(
+              title,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/create_project');
-        },
-        tooltip: 'Create Project',
-        child: Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }
+

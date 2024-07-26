@@ -2,32 +2,34 @@ import 'package:flutter/material.dart';
 
 
 class CreateAccountScreen extends StatelessWidget {
+  const CreateAccountScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Account'),
+        title: const Text('Create Account'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextField(
+            const TextField(
               decoration: InputDecoration(labelText: 'Username'),
             ),
-            TextField(
+            const TextField(
               decoration: InputDecoration(labelText: 'Email'),
             ),
-            TextField(
+            const TextField(
               decoration: InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('Create Account'),
+              child: const Text('Create Account'),
             ),
           ],
         ),
