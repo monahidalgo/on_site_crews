@@ -145,7 +145,7 @@ class DashboardScreen extends StatelessWidget {
         Navigator.pushNamed(context, route);
       },
       child: Card(
-        color: color,
+        color: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
@@ -154,12 +154,12 @@ class DashboardScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 40, color: Colors.white),
+              Icon(icon, size: 40, color: color), // Icon color set to the passed color
               const SizedBox(height: 8),
               Text(
                 title,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
