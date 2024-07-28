@@ -13,21 +13,21 @@ class DashboardScreen extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              decoration: const BoxDecoration(
+            const DrawerHeader(
+              decoration: BoxDecoration(
                 color: Colors.blue,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Center(
+                  Center(
                     child: CircleAvatar(
                       radius: 40,
                       backgroundImage: AssetImage('assets/images/bkg.png'),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  const Text(
+                  SizedBox(height: 20),
+                  Text(
                     'Mona Hidalgo',
                     style: TextStyle(
                       color: Colors.white,
@@ -99,11 +99,11 @@ class DashboardScreen extends StatelessWidget {
               const Text(
                 'Project Tools',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               GridView.count(
                 crossAxisCount: 3,
                 shrinkWrap: true,
@@ -162,7 +162,7 @@ class DashboardScreen extends StatelessWidget {
                 title,
                 style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 16,
+                  fontSize: 10,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
