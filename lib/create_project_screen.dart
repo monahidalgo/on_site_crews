@@ -5,6 +5,9 @@ class CreateProjectScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController descriptionController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Project'),
@@ -13,19 +16,27 @@ class CreateProjectScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            const TextField(
-              decoration: InputDecoration(labelText: 'Project Name'),
+            TextField(
+              controller: nameController,
+              decoration: const InputDecoration(
+                labelText: 'Project Name',
+              ),
             ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Project Number'),
+            const SizedBox(height: 10),
+            TextField(
+              controller: descriptionController,
+              decoration: const InputDecoration(
+                labelText: 'Project Description',
+              ),
             ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Description'),
-            ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Save project logic
-                Navigator.pop(context);
+                final project = {
+                  'name': nameController.text,
+                  'description': descriptionController.text,
+                };
+                Navigator.pop(context, project);
               },
               child: const Text('Create Project'),
             ),

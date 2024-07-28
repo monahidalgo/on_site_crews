@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
+  final AudioPlayer audioPlayer = AudioPlayer();
+
+  DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class DashboardScreen extends StatelessWidget {
                     'Mona Hidalgo',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -42,14 +45,14 @@ class DashboardScreen extends StatelessWidget {
               leading: const Icon(Icons.photo_camera),
               title: const Text('Photos'),
               onTap: () {
-                Navigator.pushNamed(context, '/photos');
+                Navigator.pushNamed(context, '/gallery');
               },
             ),
             ListTile(
               leading: const Icon(Icons.attach_file),
               title: const Text('Files'),
               onTap: () {
-                Navigator.pushNamed(context, '/files');
+                Navigator.pushNamed(context, '/document_management');
               },
             ),
             ListTile(
@@ -77,7 +80,7 @@ class DashboardScreen extends StatelessWidget {
               leading: const Icon(Icons.chat),
               title: const Text('Chats'),
               onTap: () {
-                Navigator.pushNamed(context, '/chats');
+                Navigator.pushNamed(context, '/project_chat');
               },
             ),
             ListTile(
@@ -111,17 +114,17 @@ class DashboardScreen extends StatelessWidget {
                 children: [
                   _buildDashboardCard(context, 'Projects', Icons.business, Colors.red, '/projects'),
                   _buildDashboardCard(context, 'Time-cards', Icons.access_time, Colors.orange, '/time_cards'),
-                  _buildDashboardCard(context, 'Photos', Icons.photo, Colors.green, '/photos'),
-                  _buildDashboardCard(context, 'Tasks', Icons.assignment, Colors.blue, '/tasks'),
+                  _buildDashboardCard(context, 'Gallery', Icons.photo, Colors.green, '/gallery'),
+                  _buildDashboardCard(context, 'Tasks', Icons.assignment, Colors.blue, '/task_management'),
                   _buildDashboardCard(context, 'Reports', Icons.report, Colors.purple, '/reports'),
                   _buildDashboardCard(context, 'Invoices', Icons.receipt, Colors.red, '/invoices'),
                   _buildDashboardCard(context, 'Crews', Icons.group, Colors.teal, '/crews'),
-                  _buildDashboardCard(context, 'Chats', Icons.chat, Colors.amber, '/chats'),
+                  _buildDashboardCard(context, 'Chats', Icons.chat, Colors.amber, '/project_chat'),
                   _buildDashboardCard(context, 'Equipment', Icons.construction, Colors.blue, '/equipment'),
                   _buildDashboardCard(context, 'Materials', Icons.production_quantity_limits, Colors.pink, '/materials'),
                   _buildDashboardCard(context, 'Items', Icons.list, Colors.teal, '/items'),
                   _buildDashboardCard(context, 'Incidents', Icons.safety_check, Colors.amber, '/incidents'),
-                  _buildDashboardCard(context, 'Docs', Icons.document_scanner, Colors.pink, '/docs'),
+                  _buildDashboardCard(context, 'Docs', Icons.document_scanner, Colors.pink, '/document_management'),
                   _buildDashboardCard(context, 'Contacts', Icons.contacts_rounded, Colors.pink, '/contacts'),
                 ],
               ),
@@ -134,8 +137,8 @@ class DashboardScreen extends StatelessWidget {
           Navigator.pushNamed(context, '/create_project');
         },
         tooltip: 'Create Project',
-        child: const Icon(Icons.add),
         backgroundColor: Colors.blue,
+        child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
@@ -144,6 +147,7 @@ class DashboardScreen extends StatelessWidget {
   Widget _buildDashboardCard(BuildContext context, String title, IconData icon, Color color, String route) {
     return GestureDetector(
       onTap: () {
+        audioPlayer.play(AssetSource('assets/sounds/click_sound.mp3'));
         Navigator.pushNamed(context, route);
       },
       child: Card(
