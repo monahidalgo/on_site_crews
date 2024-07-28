@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:on_site_crews/notifications_screen.dart';
+import 'package:on_site_crews/projects_screen.dart';
 import 'package:on_site_crews/time_cards_screen.dart';
 import 'package:on_site_crews/gallery_screen.dart';
 import 'package:on_site_crews/login_screen.dart';
@@ -11,7 +12,6 @@ import 'package:on_site_crews/add_task_screen.dart';
 import 'package:on_site_crews/chat_screen.dart';
 import 'package:on_site_crews/document_management_screen.dart';
 import 'package:on_site_crews/profile_screen.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -30,19 +30,21 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/login', // Start with the login screen
       routes: {
-        '/login': (context) => LoginScreen(), // Route for the login screen
+        '/login': (context) => LoginScreen(),
         '/create_account': (context) => const CreateAccountScreen(),
-        '/dashboard': (context) => const DashboardScreen(),
+        '/dashboard': (context) => DashboardScreen(),
         '/create_project': (context) => const CreateProjectScreen(),
-        '/manage_tasks': (context) => const TaskManagementScreen(),
+        '/task_management': (context) => const TaskManagementScreen(),
         '/add_task': (context) => const AddTaskScreen(),
         '/project_chat': (context) => const ChatScreen(),
         '/document_management': (context) => const DocumentManagementScreen(),
-        '/notifications_screen': (context) => const NotificationsScreen(),
+        '/notifications': (context) => const NotificationsScreen(),
         '/profile': (context) => const ProfileScreen(),
         '/time_cards': (context) => const TimeCardsScreen(),
         '/gallery': (context) => const GalleryScreen(),
+        '/projects': (context) => const ProjectsScreen(),
       },
     );
   }
 }
+
