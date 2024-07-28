@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
-
 class CreateAccountScreen extends StatelessWidget {
   const CreateAccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController usernameController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Account'),
@@ -14,20 +17,23 @@ class CreateAccountScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            const TextField(
-              decoration: InputDecoration(labelText: 'Username'),
+            TextField(
+              controller: usernameController,
+              decoration: const InputDecoration(labelText: 'Username'),
             ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Password'),
+            TextField(
+              controller: passwordController,
+              decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
-            const SizedBox(height: 20.0),
+            TextField(
+              controller: emailController,
+              decoration: const InputDecoration(labelText: 'Email'),
+            ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, '/dashboard');
               },
               child: const Text('Create Account'),
             ),

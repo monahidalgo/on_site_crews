@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:on_site_crews/notifications_screen.dart';
 import 'package:on_site_crews/time_cards_screen.dart';
-import 'gallery_screen.dart';
-import 'login_screen.dart';
-import 'create_account_screen.dart';
-import 'dashboard_screen.dart';
-import 'create_project_screen.dart';
-import 'task_management_screen.dart';
-import 'add_task_screen.dart';
-import 'chat_screen.dart';
-import 'document_management_screen.dart';
-import 'profile_screen.dart';
+import 'package:on_site_crews/gallery_screen.dart';
+import 'package:on_site_crews/login_screen.dart';
+import 'package:on_site_crews/create_account_screen.dart';
+import 'package:on_site_crews/dashboard_screen.dart';
+import 'package:on_site_crews/create_project_screen.dart';
+import 'package:on_site_crews/task_management_screen.dart';
+import 'package:on_site_crews/add_task_screen.dart';
+import 'package:on_site_crews/chat_screen.dart';
+import 'package:on_site_crews/document_management_screen.dart';
+import 'package:on_site_crews/profile_screen.dart';
+
 
 void main() {
   runApp(const MyApp());

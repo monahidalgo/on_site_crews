@@ -13,19 +13,21 @@ class DashboardScreen extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
+            DrawerHeader(
+              decoration: const BoxDecoration(
                 color: Colors.blue,
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundImage: AssetImage('assets/mona.jpg'),
+                  const Center(
+                    child: CircleAvatar(
+                      radius: 40,
+                      backgroundImage: AssetImage('assets/images/bkg.png'),
+                    ),
                   ),
-                  SizedBox(height: 20),
-                  Text(
+                  const SizedBox(height: 20),
+                  const Text(
                     'Mona Hidalgo',
                     style: TextStyle(
                       color: Colors.white,
@@ -103,13 +105,13 @@ class DashboardScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               GridView.count(
-                crossAxisCount: 3, // Smaller boxes with more columns
+                crossAxisCount: 3,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
                   _buildDashboardCard(context, 'Projects', Icons.business, Colors.red, '/projects'),
                   _buildDashboardCard(context, 'Time-cards', Icons.access_time, Colors.orange, '/time_cards'),
-                  _buildDashboardCard(context, 'Photos', Icons.photo, Colors.green, '/gallery'),
+                  _buildDashboardCard(context, 'Photos', Icons.photo, Colors.green, '/photos'),
                   _buildDashboardCard(context, 'Tasks', Icons.assignment, Colors.blue, '/tasks'),
                   _buildDashboardCard(context, 'Reports', Icons.report, Colors.purple, '/reports'),
                   _buildDashboardCard(context, 'Invoices', Icons.receipt, Colors.red, '/invoices'),
@@ -154,7 +156,7 @@ class DashboardScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 40, color: color), // Icon color set to the passed color
+              Icon(icon, size: 40, color: color),
               const SizedBox(height: 8),
               Text(
                 title,
