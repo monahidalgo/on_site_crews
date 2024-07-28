@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:on_site_crews/notifications_screen.dart';
 import 'package:on_site_crews/time_cards_screen.dart';
 import 'gallery_screen.dart';
@@ -37,8 +36,8 @@ class MyApp extends StatelessWidget {
         '/manage_tasks': (context) => const TaskManagementScreen(),
         '/add_task': (context) => const AddTaskScreen(),
         '/project_chat': (context) => const ChatScreen(),
-        '/document_management': (context) => DocumentManagementScreen(),
-        '/notifications_screen': (context) => NotificationsScreen(),
+        '/document_management': (context) => const DocumentManagementScreen(),
+        '/notifications_screen': (context) => const NotificationsScreen(),
         '/profile': (context) => const ProfileScreen(),
         '/time_cards': (context) => const TimeCardsScreen(),
         '/gallery': (context) => const GalleryScreen(),

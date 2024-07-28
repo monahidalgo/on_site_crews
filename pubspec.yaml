@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.6
   geolocator: ^8.2.1
+  fluentui_system_icons: ^1.1.2
 
 dev_dependencies:
   flutter_test:

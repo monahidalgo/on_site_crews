@@ -22,9 +22,9 @@ class DashboardScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 30,
-                    backgroundImage: AssetImage('assets/profile_image.png'),
+                    backgroundImage: AssetImage('assets/mona.jpg'),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 20),
                   Text(
                     'Mona Hidalgo',
                     style: TextStyle(
@@ -37,7 +37,7 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.photo),
+              leading: const Icon(Icons.photo_camera),
               title: const Text('Photos'),
               onTap: () {
                 Navigator.pushNamed(context, '/photos');
@@ -103,18 +103,24 @@ class DashboardScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               GridView.count(
-                crossAxisCount: 2,
+                crossAxisCount: 3, // Smaller boxes with more columns
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  _buildDashboardBox(context, 'Time-cards', Icons.access_time, Colors.orange, '/time_cards'),
-                  _buildDashboardBox(context, 'Gallery', Icons.photo, Colors.green, '/gallery'),
-                  _buildDashboardBox(context, 'Tasks', Icons.assignment, Colors.blue, '/tasks'),
-                  _buildDashboardBox(context, 'Reports', Icons.report, Colors.purple, '/reports'),
-                  _buildDashboardBox(context, 'Invoices', Icons.receipt, Colors.red, '/invoices'),
-                  _buildDashboardBox(context, 'Crews', Icons.group, Colors.teal, '/crews'),
-                  _buildDashboardBox(context, 'Chats', Icons.chat, Colors.amber, '/chats'),
-                  _buildDashboardBox(context, 'Photos', Icons.photo_album, Colors.pink, '/photos'),
+                  _buildDashboardCard(context, 'Projects', Icons.business, Colors.red, '/projects'),
+                  _buildDashboardCard(context, 'Time-cards', Icons.access_time, Colors.orange, '/time_cards'),
+                  _buildDashboardCard(context, 'Photos', Icons.photo, Colors.green, '/gallery'),
+                  _buildDashboardCard(context, 'Tasks', Icons.assignment, Colors.blue, '/tasks'),
+                  _buildDashboardCard(context, 'Reports', Icons.report, Colors.purple, '/reports'),
+                  _buildDashboardCard(context, 'Invoices', Icons.receipt, Colors.red, '/invoices'),
+                  _buildDashboardCard(context, 'Crews', Icons.group, Colors.teal, '/crews'),
+                  _buildDashboardCard(context, 'Chats', Icons.chat, Colors.amber, '/chats'),
+                  _buildDashboardCard(context, 'Equipment', Icons.construction, Colors.blue, '/equipment'),
+                  _buildDashboardCard(context, 'Materials', Icons.production_quantity_limits, Colors.pink, '/materials'),
+                  _buildDashboardCard(context, 'Items', Icons.list, Colors.teal, '/items'),
+                  _buildDashboardCard(context, 'Incidents', Icons.safety_check, Colors.amber, '/incidents'),
+                  _buildDashboardCard(context, 'Docs', Icons.document_scanner, Colors.pink, '/docs'),
+                  _buildDashboardCard(context, 'Contacts', Icons.contacts_rounded, Colors.pink, '/contacts'),
                 ],
               ),
             ],
@@ -127,44 +133,40 @@ class DashboardScreen extends StatelessWidget {
         },
         tooltip: 'Create Project',
         child: const Icon(Icons.add),
+        backgroundColor: Colors.blue,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 
-  Widget _buildDashboardBox(BuildContext context, String title, IconData icon, Color color, String route) {
+  Widget _buildDashboardCard(BuildContext context, String title, IconData icon, Color color, String route) {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, route);
       },
-      child: Container(
-        margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.all(12.0), // Smaller padding to reduce size
-        decoration: BoxDecoration(
-          color: color,
+      child: Card(
+        color: color,
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 4.0,
-              spreadRadius: 1.0,
-            ),
-          ],
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 40, color: Colors.white), // Smaller icon size
-            const SizedBox(height: 8),
-            Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+        margin: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 40, color: Colors.white),
+              const SizedBox(height: 8),
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

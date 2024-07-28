@@ -21,17 +21,17 @@ class TimeCardsScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => WeeklyTimeCardsScreen()),
+                  MaterialPageRoute(builder: (context) => const WeeklyTimeCardsScreen()),
                 );
               },
-              child: Card(
+              child: const Card(
                 elevation: 4.0,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(16.0),
                   child: Row(
                     children: [
                       Icon(Icons.calendar_today, color: Colors.blue),
-                      const SizedBox(width: 16.0),
+                      SizedBox(width: 16.0),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -39,12 +39,12 @@ class TimeCardsScreen extends StatelessWidget {
                             'Weekly Time-cards',
                             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                           ),
-                          const SizedBox(height: 8.0),
+                          SizedBox(height: 8.0),
                           Text(
                             'Monday - Friday',
                             style: TextStyle(fontSize: 16.0),
                           ),
-                          const SizedBox(height: 8.0),
+                          SizedBox(height: 8.0),
                           Text(
                             '08:00 AM - 05:00 PM',
                             style: TextStyle(fontSize: 16.0),
@@ -61,17 +61,17 @@ class TimeCardsScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MonthlyTimeCardsScreen()),
+                  MaterialPageRoute(builder: (context) => const MonthlyTimeCardsScreen()),
                 );
               },
-              child: Card(
+              child: const Card(
                 elevation: 4.0,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(16.0),
                   child: Row(
                     children: [
                       Icon(Icons.calendar_view_month, color: Colors.blue),
-                      const SizedBox(width: 16.0),
+                      SizedBox(width: 16.0),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -79,12 +79,12 @@ class TimeCardsScreen extends StatelessWidget {
                             'Monthly Time-cards',
                             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                           ),
-                          const SizedBox(height: 8.0),
+                          SizedBox(height: 8.0),
                           Text(
                             'Last day of the month',
                             style: TextStyle(fontSize: 16.0),
                           ),
-                          const SizedBox(height: 8.0),
+                          SizedBox(height: 8.0),
                           Text(
                             '08:00 AM - 05:00 PM',
                             style: TextStyle(fontSize: 16.0),
@@ -97,7 +97,7 @@ class TimeCardsScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16.0),
-            Center(
+            const Center(
               child: Text(
                 'Full Time-cards Feature Coming Soon!',
                 style: TextStyle(fontSize: 16.0, color: Colors.grey),
@@ -111,6 +111,8 @@ class TimeCardsScreen extends StatelessWidget {
 }
 
 class WeeklyTimeCardsScreen extends StatefulWidget {
+  const WeeklyTimeCardsScreen({super.key});
+
   @override
   _WeeklyTimeCardsScreenState createState() => _WeeklyTimeCardsScreenState();
 }
@@ -150,7 +152,7 @@ class _WeeklyTimeCardsScreenState extends State<WeeklyTimeCardsScreen> {
 
   void _startTimer() {
     _elapsedSeconds = 0;
-    _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       setState(() {
         _elapsedSeconds++;
       });
@@ -170,7 +172,7 @@ class _WeeklyTimeCardsScreenState extends State<WeeklyTimeCardsScreen> {
     });
 
     _positionStream = Geolocator.getPositionStream(
-      locationSettings: LocationSettings(
+      locationSettings: const LocationSettings(
         accuracy: LocationAccuracy.high,
         distanceFilter: 10,
       ),
@@ -225,7 +227,7 @@ class _WeeklyTimeCardsScreenState extends State<WeeklyTimeCardsScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
               ),
-              child: Text('Clock In'),
+              child: const Text('Clock In'),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
@@ -235,27 +237,27 @@ class _WeeklyTimeCardsScreenState extends State<WeeklyTimeCardsScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
               ),
-              child: Text('Clock Out'),
+              child: const Text('Clock Out'),
             ),
             const SizedBox(height: 16.0),
             Text(
               _clockInTime == null
                   ? 'Not Clocked In'
                   : 'Clocked In: ${_clockInTime.toString()} at (${_clockInPosition?.latitude}, ${_clockInPosition?.longitude})',
-              style: TextStyle(fontSize: 16.0),
+              style: const TextStyle(fontSize: 16.0),
             ),
             const SizedBox(height: 8.0),
             Text(
               _clockOutTime == null
                   ? 'Not Clocked Out'
                   : 'Clocked Out: ${_clockOutTime.toString()} at (${_clockOutPosition?.latitude}, ${_clockOutPosition?.longitude})',
-              style: TextStyle(fontSize: 16.0),
+              style: const TextStyle(fontSize: 16.0),
             ),
             const SizedBox(height: 16.0),
             if (_clockInTime != null && _clockOutTime == null)
               Text(
                 'Elapsed Time: ${_formatElapsedTime()}',
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               ),
           ],
         ),
@@ -265,6 +267,8 @@ class _WeeklyTimeCardsScreenState extends State<WeeklyTimeCardsScreen> {
 }
 
 class MonthlyTimeCardsScreen extends StatefulWidget {
+  const MonthlyTimeCardsScreen({super.key});
+
   @override
   _MonthlyTimeCardsScreenState createState() => _MonthlyTimeCardsScreenState();
 }
@@ -304,7 +308,7 @@ class _MonthlyTimeCardsScreenState extends State<MonthlyTimeCardsScreen> {
 
   void _startTimer() {
     _elapsedSeconds = 0;
-    _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       setState(() {
         _elapsedSeconds++;
       });
@@ -324,7 +328,7 @@ class _MonthlyTimeCardsScreenState extends State<MonthlyTimeCardsScreen> {
     });
 
     _positionStream = Geolocator.getPositionStream(
-      locationSettings: LocationSettings(
+      locationSettings: const LocationSettings(
         accuracy: LocationAccuracy.high,
         distanceFilter: 10,
       ),
@@ -379,7 +383,7 @@ class _MonthlyTimeCardsScreenState extends State<MonthlyTimeCardsScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
               ),
-              child: Text('Clock In'),
+              child: const Text('Clock In'),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
@@ -389,27 +393,27 @@ class _MonthlyTimeCardsScreenState extends State<MonthlyTimeCardsScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
               ),
-              child: Text('Clock Out'),
+              child: const Text('Clock Out'),
             ),
             const SizedBox(height: 16.0),
             Text(
               _clockInTime == null
                   ? 'Not Clocked In'
                   : 'Clocked In: ${_clockInTime.toString()} at (${_clockInPosition?.latitude}, ${_clockInPosition?.longitude})',
-              style: TextStyle(fontSize: 16.0),
+              style: const TextStyle(fontSize: 16.0),
             ),
             const SizedBox(height: 8.0),
             Text(
               _clockOutTime == null
                   ? 'Not Clocked Out'
                   : 'Clocked Out: ${_clockOutTime.toString()} at (${_clockOutPosition?.latitude}, ${_clockOutPosition?.longitude})',
-              style: TextStyle(fontSize: 16.0),
+              style: const TextStyle(fontSize: 16.0),
             ),
             const SizedBox(height: 16.0),
             if (_clockInTime != null && _clockOutTime == null)
               Text(
                 'Elapsed Time: ${_formatElapsedTime()}',
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               ),
           ],
         ),
