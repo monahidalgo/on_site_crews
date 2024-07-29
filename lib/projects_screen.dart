@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'create_project_screen.dart';
 
+
 class ProjectsScreen extends StatefulWidget {
   const ProjectsScreen({super.key});
 
   @override
-  _ProjectsScreenState createState() => _ProjectsScreenState();
+  _ProjectsScreenState createState() =>_ProjectsScreenState();
 }
 
 class _ProjectsScreenState extends State<ProjectsScreen> {
   final List<Map<String, String>> projects = [
-    {'name': 'Project Alpha', 'description': 'Description of Project Alpha'},
-    {'name': 'Project Beta', 'description': 'Description of Project Beta'},
-    {'name': 'Project Gamma', 'description': 'Description of Project Gamma'},
-    {'name': 'Project Delta', 'description': 'Description of Project Delta'},
-  ];
-
-  void _addProject(Map<String, String> project) {
+    {'name': 'Alpha', 'description': 'Description of Project Alpha'},
+    {'name': 'Beta', 'description': 'Description of Project Beta'},
+    {'name': 'Gamma', 'description': 'Description of Project Gamma'},
+    {'name': 'Delta', 'description': 'Description of Project Delta'},
+    {'name': 'Bilt Soft', 'description': 'Plans for Bilt Soft'},
+  ];void _addProject(Map<String, String> project) {
     setState(() {
       projects.add(project);
     });
@@ -26,8 +26,8 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Projects'),
-        backgroundColor: Colors.orange,
+        title: const Text('Project Files'),
+        backgroundColor: Colors.green,
       ),
       body: ListView.builder(
         itemCount: projects.length,
@@ -49,19 +49,19 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                   children: [
-                    Icon(Icons.build, color: Colors.blue),
-                    SizedBox(width: 16.0),
+                    const Icon(Icons.folder_copy_outlined, color: Colors.blue),
+                    const SizedBox(width:16.0),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           project['name']!,
-                          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 8.0),
+                        const SizedBox(height: 8.0),
                         Text(
                           project['description']!,
-                          style: TextStyle(fontSize: 10.0),
+                          style: const TextStyle(fontSize: 10.0),
                         ),
                       ],
                     ),
@@ -85,17 +85,30 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
           }
         },
         tooltip: 'Create Project',
-        child: const Icon(Icons.add),
         backgroundColor: Colors.blue,
+        child: const Icon(Icons.add),
       ),
     );
   }
 }
 
-class ProjectDetailScreen extends StatelessWidget {
+class ProjectDetailScreen extends StatefulWidget {
   final Map<String, String> project;
 
   const ProjectDetailScreen({required this.project, super.key});
+
+  @override
+  State<ProjectDetailScreen> createState() => _ProjectDetailScreenState();
+}
+
+class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
+  List<String> items = [];
+
+  void addItem(String item) {
+    setState(() {
+      items.add(item);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,20 +130,19 @@ class ProjectDetailScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(project['name']!),
+        title: Text(widget.project['name']!),
         backgroundColor: Colors.orange,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              project['name']!,
+              widget.project['name']!,
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            Text(project['description']!),
+            Text(widget.project['description']!),
             const SizedBox(height: 20),
             const Text(
               'Add Items',
@@ -145,12 +157,30 @@ class ProjectDetailScreen extends StatelessWidget {
                   return ListTile(
                     title: Text(tool),
                     onTap: () {
+                      addItem(tool);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('$tool coming soon!'),
+                          content: Text('$tool added to ${widget.project['name']}!'),
                         ),
                       );
                     },
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Items',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Expanded(
+              child: ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  return ListTile(
+                    title: Text(item),
                   );
                 },
               ),

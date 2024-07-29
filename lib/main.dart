@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:on_site_crews/materials_screen.dart';
 import 'package:on_site_crews/notifications_screen.dart';
 import 'package:on_site_crews/projects_screen.dart';
 import 'package:on_site_crews/time_cards_screen.dart';
@@ -12,9 +14,18 @@ import 'package:on_site_crews/add_task_screen.dart';
 import 'package:on_site_crews/chat_screen.dart';
 import 'package:on_site_crews/document_management_screen.dart';
 import 'package:on_site_crews/profile_screen.dart';
+import 'package:on_site_crews/materials_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => MaterialsProvider()),
+        // Add other providers here...
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -43,8 +54,8 @@ class MyApp extends StatelessWidget {
         '/time_cards': (context) => const TimeCardsScreen(),
         '/gallery': (context) => const GalleryScreen(),
         '/projects': (context) => const ProjectsScreen(),
+        '/materials': (context) => const MaterialsScreen(),
       },
     );
   }
 }
-
