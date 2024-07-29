@@ -39,9 +39,10 @@ The app's design will focus on:
 - **Intuitive Navigation**: Clear and easy-to-use navigation for quick access to features.
 - **Visual Clarity**: A clean and modern interface to present information effectively.
 - **Customizable Themes**: Options to personalize the app's appearance.
-
+  
 ## Collaboration
-At this time, the project is not seeking collaborators.
+
+Currently, I'm not actively seeking collaborators. However, if you are interested in contributing or have any questions, please feel free to contact me.
 
 ## Contact
 For inquiries or to discuss mobile app development needs, please reach out:
