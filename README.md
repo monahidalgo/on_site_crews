@@ -42,7 +42,7 @@ The app's design will focus on:
   
 ## Collaboration
 
-Currently, I'm not actively seeking collaborators. However, if you are interested in contributing or have any questions, please feel free to contact me.
+Currently, I'm not actively seeking collaborators. 
 
 ## Contact
 For inquiries or to discuss mobile app development needs, please reach out:
