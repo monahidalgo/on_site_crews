@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'project_material.dart';
 
 class MaterialsProvider with ChangeNotifier {
-  List<ProjectMaterial> _materials = [
+  final List<ProjectMaterial> _materials = [
     ProjectMaterial(name: 'Concrete', quantity: 100),
     ProjectMaterial(name: 'Steel Rebar', quantity: 50),
     ProjectMaterial(name: 'Wood Planks', quantity: 200),

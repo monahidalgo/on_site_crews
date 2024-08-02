@@ -30,8 +30,8 @@ class MaterialsScreen extends StatelessWidget {
         onPressed: () {
           _showAddMaterialDialog(context);
         },
-        child: const Icon(Icons.add),
-        backgroundColor: Colors.blue, // Use Colors.blue here
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.add), // Use Colors.blue here
       ),
     );
   }

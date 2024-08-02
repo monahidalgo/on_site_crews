@@ -10,7 +10,8 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('On-Site Crews'),
+        title: const Text('Dashboard'),
+        backgroundColor: Colors.yellow,
       ),
       drawer: Drawer(
         child: ListView(
@@ -107,26 +108,37 @@ class DashboardScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              GridView.count(
-                crossAxisCount: 3,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  _buildDashboardCard(context, 'Projects', Icons.business, Colors.red, '/projects'),
-                  _buildDashboardCard(context, 'Time-cards', Icons.access_time, Colors.orange, '/time_cards'),
-                  _buildDashboardCard(context, 'Gallery', Icons.photo, Colors.green, '/gallery'),
-                  _buildDashboardCard(context, 'Tasks', Icons.assignment, Colors.blue, '/task_management'),
-                  _buildDashboardCard(context, 'Reports', Icons.report, Colors.purple, '/reports'),
-                  _buildDashboardCard(context, 'Invoices', Icons.receipt, Colors.red, '/invoices'),
-                  _buildDashboardCard(context, 'Crews', Icons.group, Colors.teal, '/crews'),
-                  _buildDashboardCard(context, 'Chats', Icons.chat, Colors.amber, '/project_chat'),
-                  _buildDashboardCard(context, 'Equipment', Icons.construction, Colors.blue, '/equipment'),
-                  _buildDashboardCard(context, 'Materials', Icons.production_quantity_limits, Colors.pink, '/materials'),
-                  _buildDashboardCard(context, 'Items', Icons.list, Colors.teal, '/items'),
-                  _buildDashboardCard(context, 'Incidents', Icons.safety_check, Colors.amber, '/incidents'),
-                  _buildDashboardCard(context, 'Docs', Icons.document_scanner, Colors.pink, '/document_management'),
-                  _buildDashboardCard(context, 'Contacts', Icons.contacts_rounded, Colors.pink, '/contacts'),
-                ],
+              Center(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    _buildDashboardCard(
+                        context, 'Projects', Icons.business, Colors.red, '/projects'),
+                    _buildDashboardCard(
+                        context, 'Time-cards', Icons.access_time, Colors.orange, '/time_cards'),
+                    _buildDashboardCard(context, 'Gallery', Icons.photo, Colors.green, '/gallery'),
+                    _buildDashboardCard(
+                        context, 'Tasks', Icons.assignment, Colors.blue, '/task_management'),
+                    _buildDashboardCard(context, 'Reports', Icons.report, Colors.purple, '/reports'),
+                    _buildDashboardCard(context, 'Invoices', Icons.receipt, Colors.red, '/invoices'),
+                    _buildDashboardCard(context, 'Crews', Icons.group, Colors.teal, '/crews'),
+                    _buildDashboardCard(
+                        context, 'Chats', Icons.chat, Colors.amber, '/project_chat'),
+                    _buildDashboardCard(
+                        context, 'Equipment', Icons.construction, Colors.blue, '/equipment'),
+                    _buildDashboardCard(
+                        context, 'Materials', Icons.production_quantity_limits, Colors.pink, '/materials'),
+                    _buildDashboardCard(context, 'Items', Icons.list, Colors.teal, '/items'),
+                    _buildDashboardCard(
+                        context, 'Incidents', Icons.safety_check, Colors.amber, '/incidents'),
+                    _buildDashboardCard(
+                        context, 'Docs', Icons.document_scanner, Colors.pink, '/document_management'),
+                    _buildDashboardCard(
+                        context, 'Contacts', Icons.contacts_rounded, Colors.pink, '/contacts'),
+                  ],
+                ),
               ),
             ],
           ),
@@ -147,33 +159,41 @@ class DashboardScreen extends StatelessWidget {
   Widget _buildDashboardCard(BuildContext context, String title, IconData icon, Color color, String route) {
     return GestureDetector(
       onTap: () {
-        audioPlayer.play(AssetSource('assets/sounds/click_sound.mp3'));
+        audioPlayer.play(AssetSource('assets/sounds/buttonclick-1.wav'));
         Navigator.pushNamed(context, route);
       },
-      child: Card(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        margin: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, size: 40, color: color),
-              const SizedBox(height: 8),
-              Text(
-                title,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            decoration: BoxDecoration(
+              color: Colors.white54,
+              borderRadius: BorderRadius.circular(8.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 4.0,
+                  spreadRadius: 1.0,
+                  offset: Offset(2.0, 2.0),
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ],
+              ],
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(16.0),
+              child: Icon(icon, size: 50, color: color),
+            ),
           ),
-        ),
+          const SizedBox(height: 8),
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
