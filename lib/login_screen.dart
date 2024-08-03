@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(vertical: 20.0),
                   alignment: Alignment.center,
                   child: Image.asset(
-                    'assets/images/onsitelogin.jpeg',
+                    'assets/images/bk.png',
                     height: 300, // Make the logo smaller or larger
                     fit: BoxFit.contain,
                   ),

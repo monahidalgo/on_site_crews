@@ -11,7 +11,7 @@ class DashboardScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard'),
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.green,
       ),
       drawer: Drawer(
         child: ListView(
@@ -19,7 +19,7 @@ class DashboardScreen extends StatelessWidget {
           children: <Widget>[
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.red,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -149,7 +149,7 @@ class DashboardScreen extends StatelessWidget {
           Navigator.pushNamed(context, '/create_project');
         },
         tooltip: 'Create Project',
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.orange,
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
