@@ -64,7 +64,7 @@ For inquiries or to discuss mobile app development needs, please reach out:
 **Owner**: Mona Hidalgo
 
 - Dashboard image of Project Tools
- <img src="https://github.com/user-attachments/assets/0c4d5ac5-4096-4d42-a751-e0eb77b541f0"alt="Project Tools" width="200" height="230">
+ ![logoyellow](https://github.com/user-attachments/assets/7e257e69-0688-4319-b989-f668fa20057f)
 
 
 
