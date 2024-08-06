@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:on_site_crews/crew_management_screen.dart';
+import 'package:on_site_crews/employee_management_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:on_site_crews/materials_screen.dart';
 import 'package:on_site_crews/notifications_screen.dart';
@@ -55,6 +57,11 @@ class MyApp extends StatelessWidget {
         '/gallery': (context) => const GalleryScreen(),
         '/projects': (context) => const ProjectsScreen(),
         '/materials': (context) => const MaterialsScreen(),
+        '/crew_management': (context) => const CrewManagementScreen(),
+        '/employee_management': (context) => const EmployeeManagementScreen(),
+
+
+
       },
     );
   }

@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
+import 'dashboard_screen.dart';
 import 'create_project_screen.dart';
-
 
 class ProjectsScreen extends StatefulWidget {
   const ProjectsScreen({super.key});
 
   @override
-  _ProjectsScreenState createState() =>_ProjectsScreenState();
+  _ProjectsScreenState createState() => _ProjectsScreenState();
 }
 
 class _ProjectsScreenState extends State<ProjectsScreen> {
   final List<Map<String, String>> projects = [
-    {'name': 'Alpha', 'description': 'Description of Project Alpha'},
-    {'name': 'Beta', 'description': 'Description of Project Beta'},
-    {'name': 'Gamma', 'description': 'Description of Project Gamma'},
-    {'name': 'Delta', 'description': 'Description of Project Delta'},
-    {'name': 'Bilt Soft', 'description': 'Plans for Bilt Soft'},
-  ];void _addProject(Map<String, String> project) {
+    {'name': 'Mall', 'description': 'Fix Top windows panels'},
+    {'name': 'Build', 'description': 'Plans for Bilt Soft'},
+  ];
+
+  void _addProject(Map<String, String> project) {
     setState(() {
       projects.add(project);
     });
@@ -26,7 +25,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Project Files'),
+        title: const Text('Tool Box Files'),
         backgroundColor: Colors.green,
       ),
       body: ListView.builder(
@@ -38,7 +37,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProjectDetailScreen(project: project),
+                  builder: (context) => DashboardScreen(project: project),
                 ),
               );
             },
@@ -50,7 +49,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                 child: Row(
                   children: [
                     const Icon(Icons.folder_copy_outlined, color: Colors.blue),
-                    const SizedBox(width:16.0),
+                    const SizedBox(width: 16.0),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -87,106 +86,6 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
         tooltip: 'Create Project',
         backgroundColor: Colors.blue,
         child: const Icon(Icons.add),
-      ),
-    );
-  }
-}
-
-class ProjectDetailScreen extends StatefulWidget {
-  final Map<String, String> project;
-
-  const ProjectDetailScreen({required this.project, super.key});
-
-  @override
-  State<ProjectDetailScreen> createState() => _ProjectDetailScreenState();
-}
-
-class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
-  List<String> items = [];
-
-  void addItem(String item) {
-    setState(() {
-      items.add(item);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final tools = [
-      'Reports',
-      'Tasks',
-      'Invoices',
-      'Photos',
-      'Time-cards',
-      'Chats',
-      'Crews',
-      'Equipment',
-      'Materials',
-      'Items',
-      'Incidents',
-      'Docs',
-      'Contacts',
-    ];
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.project['name']!),
-        backgroundColor: Colors.orange,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.project['name']!,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            Text(widget.project['description']!),
-            const SizedBox(height: 20),
-            const Text(
-              'Add Items',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                itemCount: tools.length,
-                itemBuilder: (context, index) {
-                  final tool = tools[index];
-                  return ListTile(
-                    title: Text(tool),
-                    onTap: () {
-                      addItem(tool);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('$tool added to ${widget.project['name']}!'),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Items',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  final item = items[index];
-                  return ListTile(
-                    title: Text(item),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
