@@ -64,8 +64,8 @@ For inquiries or to discuss mobile app development needs, please reach out:
 **Owner**: Mona Hidalgo
 
 - Dashboard image of Project Tools
- ![logoyellow](https://github.com/user-attachments/assets/7e257e69-0688-4319-b989-f668fa20057f)
+<img src="https://github.com/user-attachments/assets/7e257e69-0688-4319-b989-f668fa20057f" alt="Logo" style="width: 250px; height: auto;">
 
 
 
-Bilt Soft is committed to delivering a powerful and user-friendly construction site management solution. Stay tuned for updates and the upcoming release!
+Bilt Soft is committed to delivering a powerful, user-friendly construction site management solution. Stay tuned for updates and the upcoming release!
