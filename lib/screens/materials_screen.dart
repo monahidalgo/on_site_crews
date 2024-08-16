@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'materials_provider.dart';
-import 'project_material.dart';
+import '../providers/materials_provider.dart';
+import '../packages/project_material.dart';
 
 class MaterialsScreen extends StatelessWidget {
   const MaterialsScreen({super.key});

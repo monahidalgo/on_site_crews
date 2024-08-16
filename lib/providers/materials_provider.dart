@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'project_material.dart';
+import '../packages/project_material.dart';
 
 class MaterialsProvider with ChangeNotifier {
   final List<ProjectMaterial> _materials = [

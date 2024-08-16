@@ -25,7 +25,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tool Box Files'),
+        title: const Text('Project Files'),
         backgroundColor: Colors.green,
       ),
       body: ListView.builder(

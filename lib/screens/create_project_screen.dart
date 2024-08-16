@@ -18,7 +18,7 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
   XFile? _image;
   String? _priority;
   String? _status;
-  List<String> _teamMembers = [];
+  final List<String> _teamMembers = [];
 
   void _pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);

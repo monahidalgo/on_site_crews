@@ -3,15 +3,16 @@ import 'package:audioplayers/audioplayers.dart';
 
 class DashboardScreen extends StatelessWidget {
   final AudioPlayer audioPlayer = AudioPlayer();
+  final Map<String, String>? project;
 
-  DashboardScreen({super.key});
+  DashboardScreen({super.key, this.project});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dashboard'),
-        backgroundColor: Colors.green,
+        title: Text(project?['name'] ?? 'Dashboard'),
+        backgroundColor: Colors.blueAccent,
       ),
       drawer: Drawer(
         child: ListView(
@@ -19,7 +20,7 @@ class DashboardScreen extends StatelessWidget {
           children: <Widget>[
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: Colors.blueAccent,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -115,13 +116,13 @@ class DashboardScreen extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
                     _buildDashboardCard(
-                        context, 'Projects', Icons.business, Colors.red, '/projects'),
+                        context, 'Projects', Icons.business, Colors.blue, '/projects'),
                     _buildDashboardCard(
-                        context, 'Time-cards', Icons.access_time, Colors.orange, '/time_cards'),
+                        context, 'Time-cards', Icons.access_time, Colors.red, '/time_cards'),
                     _buildDashboardCard(context, 'Gallery', Icons.photo, Colors.green, '/gallery'),
                     _buildDashboardCard(
                         context, 'Tasks', Icons.assignment, Colors.blue, '/task_management'),
-                    _buildDashboardCard(context, 'Reports', Icons.report, Colors.purple, '/reports'),
+                    _buildDashboardCard(context, 'Reports', Icons.report, Colors.blue, '/reports'),
                     _buildDashboardCard(context, 'Invoices', Icons.receipt, Colors.red, '/invoices'),
                     _buildDashboardCard(context, 'Crews', Icons.group, Colors.teal, '/crews'),
                     _buildDashboardCard(
@@ -169,7 +170,7 @@ class DashboardScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white54,
               borderRadius: BorderRadius.circular(8.0),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Colors.black12,
                   blurRadius: 4.0,

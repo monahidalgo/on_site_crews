@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:on_site_crews/crew_management_screen.dart';
-import 'package:on_site_crews/employee_management_screen.dart';
+import 'package:on_site_crews/screens/crew_management_screen.dart';
+import 'package:on_site_crews/screens/employee_management_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:on_site_crews/materials_screen.dart';
-import 'package:on_site_crews/notifications_screen.dart';
-import 'package:on_site_crews/projects_screen.dart';
-import 'package:on_site_crews/time_cards_screen.dart';
-import 'package:on_site_crews/gallery_screen.dart';
-import 'package:on_site_crews/login_screen.dart';
-import 'package:on_site_crews/create_account_screen.dart';
-import 'package:on_site_crews/dashboard_screen.dart';
-import 'package:on_site_crews/create_project_screen.dart';
-import 'package:on_site_crews/task_management_screen.dart';
-import 'package:on_site_crews/add_task_screen.dart';
-import 'package:on_site_crews/chat_screen.dart';
-import 'package:on_site_crews/document_management_screen.dart';
-import 'package:on_site_crews/profile_screen.dart';
-import 'package:on_site_crews/materials_provider.dart';
+import 'package:on_site_crews/screens/materials_screen.dart';
+import 'package:on_site_crews/screens/notifications_screen.dart';
+import 'package:on_site_crews/screens/projects_screen.dart';
+import 'package:on_site_crews/screens/time_cards_screen.dart';
+import 'package:on_site_crews/screens/gallery_screen.dart';
+import 'package:on_site_crews/screens/login_screen.dart';
+import 'package:on_site_crews/screens/create_account_screen.dart';
+import 'package:on_site_crews/screens/dashboard_screen.dart';
+import 'package:on_site_crews/screens/create_project_screen.dart';
+import 'package:on_site_crews/screens/task_management_screen.dart';
+import 'package:on_site_crews/screens/add_task_screen.dart';
+import 'package:on_site_crews/screens/chat_screen.dart';
+import 'package:on_site_crews/screens/document_management_screen.dart';
+import 'package:on_site_crews/screens/profile_screen.dart';
+import 'package:on_site_crews/providers/materials_provider.dart';
+
+
 
 void main() {
   runApp(
@@ -54,7 +56,7 @@ class MyApp extends StatelessWidget {
         '/notifications': (context) => const NotificationsScreen(),
         '/profile': (context) => const ProfileScreen(),
         '/time_cards': (context) => const TimeCardsScreen(),
-        '/gallery': (context) => const GalleryScreen(),
+        '/gallery': (context) => GalleryScreen(),
         '/projects': (context) => const ProjectsScreen(),
         '/materials': (context) => const MaterialsScreen(),
         '/crew_management': (context) => const CrewManagementScreen(),
