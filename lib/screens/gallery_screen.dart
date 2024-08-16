@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class GalleryScreen extends StatefulWidget {
+  const GalleryScreen({super.key});
+
   @override
   _GalleryScreenState createState() => _GalleryScreenState();
 }
@@ -144,9 +146,9 @@ class _GalleryScreenState extends State<GalleryScreen> {
                     ),
                   ),
                   const SizedBox(height: 8.0),
-                  Text(
+                  const Text(
                     'Your gallery is empty',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.grey,
                     ),
@@ -217,8 +219,7 @@ class GalleryTab extends StatelessWidget {
 class FilterOptionsScreen extends StatefulWidget {
   final Function(Map<String, dynamic>) applyFilters;
 
-  const FilterOptionsScreen({Key? key, required this.applyFilters})
-      : super(key: key);
+  const FilterOptionsScreen({super.key, required this.applyFilters});
 
   @override
   _FilterOptionsScreenState createState() => _FilterOptionsScreenState();

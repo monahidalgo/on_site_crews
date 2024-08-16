@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(vertical: 20.0),
                   alignment: Alignment.center,
                   child: Image.asset(
-                    'assets/images/bk.png',
+                    'assets/images/crew.jpeg',
                     height: 300, // Make the logo smaller or larger
                     fit: BoxFit.contain,
                   ),
@@ -42,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                   onPressed: () {
                     if (_usernameController.text.isNotEmpty &&
                         _passwordController.text.isNotEmpty) {
-                      Navigator.pushNamed(context, '/dashboard');
+                      Navigator.pushNamed(context, '/projects'); // Updated route
                     }
                   },
                   style: ElevatedButton.styleFrom(

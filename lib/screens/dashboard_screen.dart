@@ -61,7 +61,7 @@ class DashboardScreen extends StatelessWidget {
               leading: const Icon(Icons.group),
               title: const Text('Crews'),
               onTap: () {
-                Navigator.pushNamed(context, '/crews');
+                Navigator.pushNamed(context, '/crew_management');
               },
             ),
             ListTile(
@@ -124,7 +124,7 @@ class DashboardScreen extends StatelessWidget {
                         context, 'Tasks', Icons.assignment, Colors.blue, '/task_management'),
                     _buildDashboardCard(context, 'Reports', Icons.report, Colors.blue, '/reports'),
                     _buildDashboardCard(context, 'Invoices', Icons.receipt, Colors.red, '/invoices'),
-                    _buildDashboardCard(context, 'Crews', Icons.group, Colors.teal, '/crews'),
+                    _buildDashboardCard(context, 'Crews', Icons.group, Colors.teal, '/crew_management'),
                     _buildDashboardCard(
                         context, 'Chats', Icons.chat, Colors.amber, '/project_chat'),
                     _buildDashboardCard(
