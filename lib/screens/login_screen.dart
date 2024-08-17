@@ -9,18 +9,19 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
+      body: Column(
         children: [
-          // Background image
-          Positioned.fill(
+          // Logo at the top
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
             child: Image.asset(
-              'assets/images/on.png',
-              fit: BoxFit.cover, // Ensure the image covers the entire screen
+              'assets/images/onsitelogo3.png',
+              height: 500, // Adjust the logo height as needed
+              fit: BoxFit.contain,
             ),
           ),
-          // Centered content
-          Center(
+          // Scrollable login form
+          Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
               child: ConstrainedBox(
@@ -28,15 +29,6 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 20.0),
-                      alignment: Alignment.center,
-                      child: Image.asset(
-                        'assets/images/on.png', // Logo displayed on top
-                        height: 25, // Adjust the logo size as needed
-                        fit: BoxFit.contain,
-                      ),
-                    ),
                     TextFormField(
                       controller: _usernameController,
                       decoration: const InputDecoration(
@@ -77,7 +69,7 @@ class LoginScreen extends StatelessWidget {
                         Navigator.pushNamed(context, '/forgot_password');
                       },
                       style: TextButton.styleFrom(
-                        foregroundColor: Colors.green,
+                        foregroundColor: Colors.orange,
                       ),
                       child: const Text("Forgot Password?"),
                     ),
@@ -102,7 +94,7 @@ class LoginScreen extends StatelessWidget {
                             "Create Account",
                             style: TextStyle(
                               fontSize: 16,
-                              color: Colors.green,
+                              color: Colors.orange,
                             ),
                           ),
                         ),
