@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:on_site_crews/screens/crew_management_screen.dart';
 import 'package:on_site_crews/screens/employee_management_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:on_site_crews/screens/materials_screen.dart';
 import 'package:on_site_crews/screens/notifications_screen.dart';
 import 'package:on_site_crews/screens/projects_screen.dart';
@@ -17,6 +17,8 @@ import 'package:on_site_crews/screens/chat_screen.dart';
 import 'package:on_site_crews/screens/document_management_screen.dart';
 import 'package:on_site_crews/screens/profile_screen.dart';
 import 'package:on_site_crews/providers/materials_provider.dart';
+
+
 
 void main() {
   runApp(
@@ -54,11 +56,14 @@ class MyApp extends StatelessWidget {
         '/notifications': (context) => const NotificationsScreen(),
         '/profile': (context) => const ProfileScreen(),
         '/time_cards': (context) => const TimeCardsScreen(),
-        '/gallery': (context) => const GalleryScreen(),
+        '/gallery': (context) => GalleryScreen(),
         '/projects': (context) => const ProjectsScreen(),
         '/materials': (context) => const MaterialsScreen(),
         '/crew_management': (context) => const CrewManagementScreen(),
         '/employee_management': (context) => const EmployeeManagementScreen(),
+
+
+
       },
     );
   }

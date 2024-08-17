@@ -10,8 +10,8 @@ class ProjectsScreen extends StatefulWidget {
 
 class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProviderStateMixin {
   final List<Map<String, String>> projects = [
-    {'name': 'Starbucks in Sherman Oaks Mall', 'description': 'Sherman Oaks, California'},
-    {'name': 'H Salt', 'description': 'Plans for Bilt Soft'},
+    {'name': 'Mall', 'description': 'Fix Top windows panels'},
+    {'name': 'Build', 'description': 'Plans for Bilt Soft'},
     {'name': 'Park', 'description': 'Renovate playground'},
     {'name': 'Office', 'description': 'New workspaces setup'},
   ];
@@ -56,12 +56,28 @@ class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProvid
     }
   }
 
+  void _navigateToCreateProjectScreen() async {
+    final result = await Navigator.pushNamed(context, '/create_project_screen');
+    if (result == 'created') {
+      Navigator.pushNamed(context, '/dashboard');
+    }
+  }
+
+  void _navigateToDashboardScreen(Map<String, String> project) {
+    Navigator.pushNamed(
+      context,
+      '/dashboard',
+      arguments: project,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Projects'),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.grey,
+        automaticallyImplyLeading: false, // Removes the top left arrow
       ),
       body: ListView.builder(
         itemCount: projects.length,
@@ -71,7 +87,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProvid
 
           return GestureDetector(
             onTap: () {
-              // Your navigation logic here
+              _navigateToDashboardScreen(project);
             },
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -121,9 +137,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProvid
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Your project creation logic here
-        },
+        onPressed: _navigateToCreateProjectScreen,
         tooltip: 'Create Project',
         backgroundColor: Colors.blue,
         child: const Icon(Icons.add),
