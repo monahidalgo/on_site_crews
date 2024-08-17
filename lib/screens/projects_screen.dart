@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dashboard_screen.dart';
-import 'create_project_screen.dart';
+import 'dart:math';
 
 class ProjectsScreen extends StatefulWidget {
   const ProjectsScreen({super.key});
@@ -9,19 +8,52 @@ class ProjectsScreen extends StatefulWidget {
   _ProjectsScreenState createState() => _ProjectsScreenState();
 }
 
-class _ProjectsScreenState extends State<ProjectsScreen> {
+class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProviderStateMixin {
   final List<Map<String, String>> projects = [
-    {'name': 'Mall', 'description': 'Fix Top windows panels'},
-    {'name': 'Build', 'description': 'Plans for Bilt Soft'},
+    {'name': 'Starbucks in Sherman Oaks Mall', 'description': 'Sherman Oaks, California'},
+    {'name': 'H Salt', 'description': 'Plans for Bilt Soft'},
     {'name': 'Park', 'description': 'Renovate playground'},
     {'name': 'Office', 'description': 'New workspaces setup'},
   ];
 
-  void _addProject(Map<String, String> project) {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+  bool isFlipped1 = false;
+  bool isFlipped2 = false;
+  bool isFlipped3 = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _flipIcon(bool isFlipped, int iconNumber) {
     setState(() {
-      projects.add(project);
-      projects.sort((a, b) => a['name']!.compareTo(b['name']!));
+      if (iconNumber == 1) {
+        isFlipped1 = !isFlipped1;
+      } else if (iconNumber == 2) {
+        isFlipped2 = !isFlipped2;
+      } else if (iconNumber == 3) {
+        isFlipped3 = !isFlipped3;
+      }
     });
+
+    if (isFlipped) {
+      _controller.reverse();
+    } else {
+      _controller.forward();
+    }
   }
 
   @override
@@ -39,12 +71,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
 
           return GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DashboardScreen(project: project),
-                ),
-              );
+              // Your navigation logic here
             },
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -94,16 +121,8 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final newProject = await Navigator.push<Map<String, String>>(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const CreateProjectScreen(),
-            ),
-          );
-          if (newProject != null) {
-            _addProject(newProject);
-          }
+        onPressed: () {
+          // Your project creation logic here
         },
         tooltip: 'Create Project',
         backgroundColor: Colors.blue,
@@ -113,22 +132,58 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            IconButton(
-              icon: const Icon(Icons.home),
-              onPressed: () {
-                Navigator.pushNamed(context, '/home'); // Replace with the actual route if different
+            AnimatedBuilder(
+              animation: _animation,
+              builder: (context, child) {
+                return Transform(
+                  transform: Matrix4.rotationY(pi * _animation.value),
+                  alignment: Alignment.center,
+                  child: IconButton(
+                    icon: isFlipped1
+                        ? const Icon(Icons.home)
+                        : const Icon(Icons.home_outlined),
+                    color: Colors.red,  // Color for the first icon
+                    onPressed: () {
+                      _flipIcon(isFlipped1, 1);
+                    },
+                  ),
+                );
               },
             ),
-            IconButton(
-              icon: const Icon(Icons.assignment),
-              onPressed: () {
-                Navigator.pushNamed(context, '/activity'); // Replace with the actual route if different
+            AnimatedBuilder(
+              animation: _animation,
+              builder: (context, child) {
+                return Transform(
+                  transform: Matrix4.rotationY(pi * _animation.value),
+                  alignment: Alignment.center,
+                  child: IconButton(
+                    icon: isFlipped2
+                        ? const Icon(Icons.assignment)
+                        : const Icon(Icons.assignment_outlined),
+                    color: Colors.blue,  // Color for the second icon
+                    onPressed: () {
+                      _flipIcon(isFlipped2, 2);
+                    },
+                  ),
+                );
               },
             ),
-            IconButton(
-              icon: const Icon(Icons.chat),
-              onPressed: () {
-                Navigator.pushNamed(context, '/chat'); // Replace with the actual route if different
+            AnimatedBuilder(
+              animation: _animation,
+              builder: (context, child) {
+                return Transform(
+                  transform: Matrix4.rotationY(pi * _animation.value),
+                  alignment: Alignment.center,
+                  child: IconButton(
+                    icon: isFlipped3
+                        ? const Icon(Icons.chat)
+                        : const Icon(Icons.chat_bubble_outline),
+                    color: Colors.green,  // Color for the third icon
+                    onPressed: () {
+                      _flipIcon(isFlipped3, 3);
+                    },
+                  ),
+                );
               },
             ),
           ],
