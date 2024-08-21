@@ -13,9 +13,9 @@ class LoginScreen extends StatelessWidget {
         children: [
           // Logo at the top
           Padding(
-            padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+            padding: const EdgeInsets.only(top: 5.0, bottom: 2.0),
             child: Image.asset(
-              'assets/images/onsitelogo3.png',
+              'assets/images/sitelogo.png',
               height: 500, // Adjust the logo height as needed
               fit: BoxFit.contain,
             ),
@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                         fillColor: Colors.white70, // Slightly transparent background
                       ),
                     ),
-                    const SizedBox(height: 20.0),
+                    const SizedBox(height: 10.0),
                     TextFormField(
                       controller: _passwordController,
                       decoration: const InputDecoration(

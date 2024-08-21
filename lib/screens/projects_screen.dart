@@ -10,10 +10,9 @@ class ProjectsScreen extends StatefulWidget {
 
 class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProviderStateMixin {
   final List<Map<String, String>> projects = [
-    {'name': 'Mall', 'description': 'Fix Top windows panels'},
-    {'name': 'Build', 'description': 'Plans for Bilt Soft'},
-    {'name': 'Park', 'description': 'Renovate playground'},
-    {'name': 'Office', 'description': 'New workspaces setup'},
+    {'name': 'Sherman Oaks Mall', 'description': 'Bring in H Salt inside'},
+    {'name': 'Sony Music', 'description': 'Media Offices'},
+    {'name': 'Disneyland', 'description': 'Renovate'},
   ];
 
   late AnimationController _controller;
@@ -79,62 +78,64 @@ class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProvid
         backgroundColor: Colors.grey,
         automaticallyImplyLeading: false, // Removes the top left arrow
       ),
-      body: ListView.builder(
-        itemCount: projects.length,
-        itemBuilder: (context, index) {
-          final project = projects[index];
-          final color = _getProjectColor(project['name']!);
+      body: SafeArea(
+        child: ListView.builder(
+          itemCount: projects.length,
+          itemBuilder: (context, index) {
+            final project = projects[index];
+            final color = _getProjectColor(project['name']!);
 
-          return GestureDetector(
-            onTap: () {
-              _navigateToDashboardScreen(project);
-            },
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(color: Colors.grey.shade300, width: 1.0),
-                  bottom: BorderSide(color: Colors.grey.shade300, width: 1.0),
+            return GestureDetector(
+              onTap: () {
+                _navigateToDashboardScreen(project);
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: Colors.grey.shade300, width: 1.0),
+                    bottom: BorderSide(color: Colors.grey.shade300, width: 1.0),
+                  ),
                 ),
-              ),
-              child: Card(
-                elevation: 4.0,
-                margin: EdgeInsets.zero,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: color,
-                        child: Text(
-                          project['name']![0],
-                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                child: Card(
+                  elevation: 4.0,
+                  margin: EdgeInsets.zero,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: color,
+                          child: Text(
+                            project['name']![0],
+                            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 16.0),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              project['name']!,
-                              style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 8.0),
-                            Text(
-                              project['description']!,
-                              style: const TextStyle(fontSize: 12.0, color: Colors.grey),
-                            ),
-                          ],
+                        const SizedBox(width: 16.0),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                project['name']!,
+                                style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(height: 8.0),
+                              Text(
+                                project['description']!,
+                                style: const TextStyle(fontSize: 12.0, color: Colors.grey),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _navigateToCreateProjectScreen,
@@ -152,14 +153,20 @@ class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProvid
                 return Transform(
                   transform: Matrix4.rotationY(pi * _animation.value),
                   alignment: Alignment.center,
-                  child: IconButton(
-                    icon: isFlipped1
-                        ? const Icon(Icons.home)
-                        : const Icon(Icons.home_outlined),
-                    color: Colors.red,  // Color for the first icon
-                    onPressed: () {
-                      _flipIcon(isFlipped1, 1);
-                    },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: isFlipped1
+                            ? const Icon(Icons.home)
+                            : const Icon(Icons.home_outlined),
+                        color: Colors.red,  // Color for the first icon
+                        onPressed: () {
+                          _flipIcon(isFlipped1, 1);
+                        },
+                      ),
+                      const Text('Home'),
+                    ],
                   ),
                 );
               },
@@ -170,14 +177,20 @@ class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProvid
                 return Transform(
                   transform: Matrix4.rotationY(pi * _animation.value),
                   alignment: Alignment.center,
-                  child: IconButton(
-                    icon: isFlipped2
-                        ? const Icon(Icons.assignment)
-                        : const Icon(Icons.assignment_outlined),
-                    color: Colors.blue,  // Color for the second icon
-                    onPressed: () {
-                      _flipIcon(isFlipped2, 2);
-                    },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: isFlipped2
+                            ? const Icon(Icons.assignment)
+                            : const Icon(Icons.assignment_outlined),
+                        color: Colors.blue,  // Color for the second icon
+                        onPressed: () {
+                          _flipIcon(isFlipped2, 2);
+                        },
+                      ),
+                      const Text('Activity'),
+                    ],
                   ),
                 );
               },
@@ -188,17 +201,36 @@ class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProvid
                 return Transform(
                   transform: Matrix4.rotationY(pi * _animation.value),
                   alignment: Alignment.center,
-                  child: IconButton(
-                    icon: isFlipped3
-                        ? const Icon(Icons.chat)
-                        : const Icon(Icons.chat_bubble_outline),
-                    color: Colors.green,  // Color for the third icon
-                    onPressed: () {
-                      _flipIcon(isFlipped3, 3);
-                    },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: isFlipped3
+                            ? const Icon(Icons.chat)
+                            : const Icon(Icons.chat_bubble_outline),
+                        color: Colors.green,  // Color for the third icon
+                        onPressed: () {
+                          _flipIcon(isFlipped3, 3);
+                        },
+                      ),
+                      const Text('Chat'),
+                    ],
                   ),
                 );
               },
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.account_circle_outlined),
+                  color: Colors.purple,  // Color for the fourth icon
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/account');
+                  },
+                ),
+                const Text('Account'),
+              ],
             ),
           ],
         ),
