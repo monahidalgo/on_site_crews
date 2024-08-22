@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart'; // For picking images
 
 class CreateProjectScreen extends StatefulWidget {
   const CreateProjectScreen({super.key});
@@ -10,26 +10,37 @@ class CreateProjectScreen extends StatefulWidget {
 }
 
 class _CreateProjectScreenState extends State<CreateProjectScreen> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _startDateController = TextEditingController();
-  final TextEditingController _endDateController = TextEditingController();
-  final ImagePicker _picker = ImagePicker();
-  XFile? _image;
-  String? _priority;
-  String? _status;
-  final List<String> _teamMembers = [];
+  final _formKey = GlobalKey<FormState>();
+  String _name = '';
+  String _projectNumber = '';
+  String _address = '';
+  String _phone = '';
+  String _contactName = '';
+  String _email = '';
+  XFile? _photo;
 
-  void _pickImage() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      _image = pickedFile;
-    });
+  final ImagePicker _picker = ImagePicker();
+
+  void _createProject() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      // Save project data here
+      Navigator.pop(context, {
+        'name': _name,
+        'projectNumber': _projectNumber,
+        'address': _address,
+        'phone': _phone,
+        'contactName': _contactName,
+        'email': _email,
+        'photoPath': _photo?.path,
+      });
+    }
   }
 
-  void _addTeamMember(String member) {
+  Future<void> _selectPhoto() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     setState(() {
-      _teamMembers.add(member);
+      _photo = pickedFile;
     });
   }
 
@@ -37,136 +48,94 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Project'),
-        backgroundColor: Colors.blue,
+        title: const Text('Create New Project'),
+        backgroundColor: Colors.green,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Project Name'),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextFormField(
+                        decoration: const InputDecoration(labelText: 'Project Name'),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a project name';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) => _name = value!,
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(labelText: 'Project Number'),
+                        onSaved: (value) => _projectNumber = value!,
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(labelText: 'Address'),
+                        onSaved: (value) => _address = value!,
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(labelText: 'Phone Number'),
+                        onSaved: (value) => _phone = value!,
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(labelText: 'Contact Person Name'),
+                        onSaved: (value) => _contactName = value!,
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(labelText: 'Email'),
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value == null || value.isEmpty || !value.contains('@')) {
+                            return 'Please enter a valid email address';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) => _email = value!,
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: _selectPhoto,
+                        child: const Text('Add Photo'),
+                      ),
+                      if (_photo != null) ...[
+                        const SizedBox(height: 16),
+                        Image.file(
+                          File(_photo!.path),
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      ],
+                      const SizedBox(height: 16),
+                    ],
+                  ),
+                ),
+              ),
             ),
-            const SizedBox(height: 8.0),
-            TextField(
-              controller: _descriptionController,
-              decoration: const InputDecoration(labelText: 'Project Description'),
-              maxLines: 3,
-            ),
-            const SizedBox(height: 8.0),
-            TextField(
-              controller: _startDateController,
-              decoration: const InputDecoration(labelText: 'Start Date'),
-              onTap: () async {
-                DateTime? pickedDate = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2101),
-                );
-                if (pickedDate != null) {
-                  setState(() {
-                    _startDateController.text = pickedDate.toLocal().toString().split(' ')[0];
-                  });
-                }
-              },
-            ),
-            const SizedBox(height: 8.0),
-            TextField(
-              controller: _endDateController,
-              decoration: const InputDecoration(labelText: 'End Date'),
-              onTap: () async {
-                DateTime? pickedDate = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2101),
-                );
-                if (pickedDate != null) {
-                  setState(() {
-                    _endDateController.text = pickedDate.toLocal().toString().split(' ')[0];
-                  });
-                }
-              },
-            ),
-            const SizedBox(height: 8.0),
-            DropdownButtonFormField<String>(
-              value: _priority,
-              decoration: const InputDecoration(labelText: 'Priority'),
-              items: ['Low', 'Medium', 'High'].map((String priority) {
-                return DropdownMenuItem<String>(
-                  value: priority,
-                  child: Text(priority),
-                );
-              }).toList(),
-              onChanged: (newValue) {
-                setState(() {
-                  _priority = newValue;
-                });
-              },
-            ),
-            const SizedBox(height: 8.0),
-            DropdownButtonFormField<String>(
-              value: _status,
-              decoration: const InputDecoration(labelText: 'Status'),
-              items: ['Planned', 'In Progress', 'Completed'].map((String status) {
-                return DropdownMenuItem<String>(
-                  value: status,
-                  child: Text(status),
-                );
-              }).toList(),
-              onChanged: (newValue) {
-                setState(() {
-                  _status = newValue;
-                });
-              },
-            ),
-            const SizedBox(height: 8.0),
-            ElevatedButton(
-              onPressed: _pickImage,
-              child: const Text('Pick Project Image'),
-            ),
-            const SizedBox(height: 8.0),
-            _image != null
-                ? Image.file(File(_image!.path))
-                : const Text('No image selected'),
-            const SizedBox(height: 16.0),
-            const Text('Team Members'),
-            Wrap(
-              spacing: 8.0,
-              children: _teamMembers
-                  .map((member) => Chip(
-                label: Text(member),
-                onDeleted: () {
-                  setState(() {
-                    _teamMembers.remove(member);
-                  });
-                },
-              ))
-                  .toList(),
-            ),
-            const SizedBox(height: 8.0),
-            TextField(
-              decoration: const InputDecoration(labelText: 'Add Team Member'),
-              onSubmitted: _addTeamMember,
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                final newProject = {
-                  'name': _nameController.text,
-                  'description': _descriptionController.text,
-                  'startDate': _startDateController.text,
-                  'endDate': _endDateController.text,
-                  'priority': _priority ?? '',
-                  'status': _status ?? '',
-                  'teamMembers': _teamMembers.join(', '),
-                  'image': _image?.path ?? '',
-                };
-                Navigator.pop(context, newProject);
-              },
-              child: const Text('Create Project'),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: Center(
+                child: Container(
+                  width: 200, // Adjust width here
+                  child: ElevatedButton(
+                    onPressed: _createProject,
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white, backgroundColor: Colors.blue, // Set text color to white
+                      padding: const EdgeInsets.symmetric(vertical: 16.0), // Increase button height
+                      textStyle: const TextStyle(fontSize: 18), // Increase font size
+                    ),
+                    child: const Text('Create Project'),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -174,3 +143,4 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
     );
   }
 }
+
