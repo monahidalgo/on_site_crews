@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:on_site_crews/screens/crew_management_screen.dart';
 import 'package:on_site_crews/screens/employee_management_screen.dart';
+import 'package:on_site_crews/screens/project_detail_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:on_site_crews/screens/materials_screen.dart';
 import 'package:on_site_crews/screens/notifications_screen.dart';
@@ -17,8 +18,6 @@ import 'package:on_site_crews/screens/chat_screen.dart';
 import 'package:on_site_crews/screens/document_management_screen.dart';
 import 'package:on_site_crews/screens/profile_screen.dart';
 import 'package:on_site_crews/providers/materials_provider.dart';
-
-
 
 void main() {
   runApp(
@@ -41,6 +40,8 @@ class MyApp extends StatelessWidget {
       title: 'Construction Site Management',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        useMaterial3: true,
+        fontFamily: 'Roboto',
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: '/login', // Start with the login screen
@@ -56,14 +57,14 @@ class MyApp extends StatelessWidget {
         '/notifications': (context) => const NotificationsScreen(),
         '/profile': (context) => const ProfileScreen(),
         '/time_cards': (context) => const TimeCardsScreen(),
-        '/gallery': (context) => GalleryScreen(),
+        '/gallery': (context) => const GalleryScreen(),
         '/projects': (context) => const ProjectsScreen(),
-        '/materials': (context) => const MaterialsScreen(),
+        '/materials': (context) => MaterialsScreen(),
         '/crew_management': (context) => const CrewManagementScreen(),
         '/employee_management': (context) => const EmployeeManagementScreen(),
-
-
-
+        '/project_detail': (context) => ProjectDetailsScreen(
+          project: ModalRoute.of(context)!.settings.arguments as Map<String, String>?,
+        ),
       },
     );
   }

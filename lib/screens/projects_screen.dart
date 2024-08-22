@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:on_site_crews/screens/project_detail_screen.dart';
 
 class ProjectsScreen extends StatefulWidget {
   const ProjectsScreen({super.key});
@@ -17,9 +17,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProvid
 
   late AnimationController _controller;
   late Animation<double> _animation;
-  bool isFlipped1 = false;
-  bool isFlipped2 = false;
-  bool isFlipped3 = false;
+  int _expandedIndex = -1; // Track the currently expanded index
 
   @override
   void initState() {
@@ -37,37 +35,31 @@ class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProvid
     super.dispose();
   }
 
-  void _flipIcon(bool isFlipped, int iconNumber) {
+  void _toggleExpansion(int index) {
     setState(() {
-      if (iconNumber == 1) {
-        isFlipped1 = !isFlipped1;
-      } else if (iconNumber == 2) {
-        isFlipped2 = !isFlipped2;
-      } else if (iconNumber == 3) {
-        isFlipped3 = !isFlipped3;
+      if (_expandedIndex == index) {
+        _expandedIndex = -1; // Collapse if already expanded
+        _controller.reverse();
+      } else {
+        _expandedIndex = index; // Expand the new index
+        _controller.forward();
       }
     });
-
-    if (isFlipped) {
-      _controller.reverse();
-    } else {
-      _controller.forward();
-    }
   }
 
-  void _navigateToCreateProjectScreen() async {
-    final result = await Navigator.pushNamed(context, '/create_project_screen');
-    if (result == 'created') {
-      Navigator.pushNamed(context, '/dashboard');
-    }
-  }
-
-  void _navigateToDashboardScreen(Map<String, String> project) {
-    Navigator.pushNamed(
+  void _navigateToProjectDetailsScreen(Map<String, String> project) async {
+    final result = await Navigator.push(
       context,
-      '/dashboard',
-      arguments: project,
+      MaterialPageRoute(
+        builder: (context) => ProjectDetailsScreen(project: project),
+      ),
     );
+    if (result == 'closed') {
+      setState(() {
+        _expandedIndex = -1;
+        _controller.reverse();
+      });
+    }
   }
 
   @override
@@ -84,13 +76,19 @@ class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProvid
           itemBuilder: (context, index) {
             final project = projects[index];
             final color = _getProjectColor(project['name']!);
+            final isExpanded = _expandedIndex == index;
 
             return GestureDetector(
               onTap: () {
-                _navigateToDashboardScreen(project);
+                _toggleExpansion(index);
+                if (isExpanded) {
+                  _navigateToProjectDetailsScreen(project);
+                }
               },
-              child: Container(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
                 margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                height: isExpanded ? 200.0 : 100.0, // Adjust heights as needed
                 decoration: BoxDecoration(
                   border: Border(
                     top: BorderSide(color: Colors.grey.shade300, width: 1.0),
@@ -103,6 +101,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProvid
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CircleAvatar(
                           backgroundColor: color,
@@ -121,9 +120,14 @@ class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProvid
                                 style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 8.0),
-                              Text(
-                                project['description']!,
-                                style: const TextStyle(fontSize: 12.0, color: Colors.grey),
+                              AnimatedSize(
+                                duration: const Duration(milliseconds: 300),
+                                child: isExpanded
+                                    ? Text(
+                                  project['description']!,
+                                  style: const TextStyle(fontSize: 14.0, color: Colors.grey),
+                                )
+                                    : Container(), // Hide description when collapsed
                               ),
                             ],
                           ),
@@ -138,100 +142,103 @@ class _ProjectsScreenState extends State<ProjectsScreen> with SingleTickerProvid
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _navigateToCreateProjectScreen,
+        onPressed: () {
+          Navigator.pushNamed(context, '/create_project_screen');
+        },
         tooltip: 'Create Project',
         backgroundColor: Colors.blue,
         child: const Icon(Icons.add),
       ),
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.horizontal(right: Radius.circular(16)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 4,
+              offset: const Offset(0, -1),
+            ),
+          ],
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            AnimatedBuilder(
-              animation: _animation,
-              builder: (context, child) {
-                return Transform(
-                  transform: Matrix4.rotationY(pi * _animation.value),
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: isFlipped1
-                            ? const Icon(Icons.home)
-                            : const Icon(Icons.home_outlined),
-                        color: Colors.red,  // Color for the first icon
-                        onPressed: () {
-                          _flipIcon(isFlipped1, 1);
-                        },
-                      ),
-                      const Text('Home'),
-                    ],
-                  ),
-                );
-              },
+            _buildBubbleIcon(
+              icon: Icons.home,
+              label: 'Home',
+              color: Colors.red,
+              index: 0,
             ),
-            AnimatedBuilder(
-              animation: _animation,
-              builder: (context, child) {
-                return Transform(
-                  transform: Matrix4.rotationY(pi * _animation.value),
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: isFlipped2
-                            ? const Icon(Icons.assignment)
-                            : const Icon(Icons.assignment_outlined),
-                        color: Colors.blue,  // Color for the second icon
-                        onPressed: () {
-                          _flipIcon(isFlipped2, 2);
-                        },
-                      ),
-                      const Text('Activity'),
-                    ],
-                  ),
-                );
-              },
+            _buildBubbleIcon(
+              icon: Icons.assignment,
+              label: 'Activity',
+              color: Colors.blue,
+              index: 1,
             ),
-            AnimatedBuilder(
-              animation: _animation,
-              builder: (context, child) {
-                return Transform(
-                  transform: Matrix4.rotationY(pi * _animation.value),
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: isFlipped3
-                            ? const Icon(Icons.chat)
-                            : const Icon(Icons.chat_bubble_outline),
-                        color: Colors.green,  // Color for the third icon
-                        onPressed: () {
-                          _flipIcon(isFlipped3, 3);
-                        },
-                      ),
-                      const Text('Chat'),
-                    ],
-                  ),
-                );
-              },
+            _buildBubbleIcon(
+              icon: Icons.chat,
+              label: 'Chat',
+              color: Colors.green,
+              index: 2,
             ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.account_circle_outlined),
-                  color: Colors.purple,  // Color for the fourth icon
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/account');
-                  },
-                ),
-                const Text('Account'),
-              ],
+            _buildBubbleIcon(
+              icon: Icons.account_circle_outlined,
+              label: 'Account',
+              color: Colors.purple,
+              index: 3,
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBubbleIcon({
+    required IconData icon,
+    required String label,
+    required Color color,
+    required int index,
+  }) {
+    final isExpanded = _expandedIndex == index;
+
+    return GestureDetector(
+      onTap: () => _toggleExpansion(index),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        width: isExpanded ? 100 : 30, // Adjust widths as needed
+        height: 40,
+        decoration: BoxDecoration(
+          color: isExpanded ? Colors.blue : Colors.white,
+          borderRadius: BorderRadius.circular(25),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.only(left: isExpanded ? 12.0 : 0), // Move icon and text left
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              color: isExpanded ? Colors.white : color,
+            ),
+            if (isExpanded) ...[
+              const SizedBox(width: 8),
+              Text(
+                label,
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
           ],
         ),
       ),

@@ -11,147 +11,71 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(project?['name'] ?? 'Dashboard'),
+        title: Text('Dashboard - ${project?['name'] ?? 'Project Tools'}'),
         backgroundColor: Colors.blueAccent,
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blueAccent,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Project Tools',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'Roboto', // Using Roboto font
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+            ),
+            const SizedBox(height: 16),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio: 1.5,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
                 children: [
-                  Center(
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundImage: AssetImage('assets/images/bkg.png'),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    'Mona Hidalgo',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  _buildDashboardCard(
+                      context, 'Projects', Icons.business, Colors.blue, '/projects'),
+                  _buildDashboardCard(
+                      context, 'Time-cards', Icons.access_time, Colors.red, '/time_cards'),
+                  _buildDashboardCard(
+                      context, 'Gallery', Icons.photo, Colors.green, '/gallery'),
+                  _buildDashboardCard(
+                      context, 'Tasks', Icons.assignment, Colors.blue, '/task_management'),
+                  _buildDashboardCard(
+                      context, 'Reports', Icons.report, Colors.blue, '/reports'),
+                  _buildDashboardCard(
+                      context, 'Invoices', Icons.receipt, Colors.red, '/invoices'),
+                  _buildDashboardCard(
+                      context, 'Crews', Icons.group, Colors.teal, '/crew_management'),
+                  _buildDashboardCard(
+                      context, 'Chats', Icons.chat, Colors.amber, '/project_chat'),
+                  _buildDashboardCard(
+                      context, 'Equipment', Icons.construction, Colors.blue, '/equipment'),
+                  _buildDashboardCard(
+                      context, 'Materials', Icons.build, Colors.pink, '/materials'),
+                  _buildDashboardCard(
+                      context, 'Items', Icons.list, Colors.teal, '/items'),
+                  _buildDashboardCard(
+                      context, 'Incidents', Icons.warning, Colors.amber, '/incidents'),
+                  _buildDashboardCard(
+                      context, 'Docs', Icons.document_scanner, Colors.pink, '/document_management'),
+                  _buildDashboardCard(
+                      context, 'Contacts', Icons.contacts, Colors.pink, '/contacts'),
                 ],
               ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.photo_camera),
-              title: const Text('Photos'),
-              onTap: () {
-                Navigator.pushNamed(context, '/gallery');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.attach_file),
-              title: const Text('Files'),
-              onTap: () {
-                Navigator.pushNamed(context, '/document_management');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.group),
-              title: const Text('Crews'),
-              onTap: () {
-                Navigator.pushNamed(context, '/crew_management');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.report),
-              title: const Text('Project Reports'),
-              onTap: () {
-                Navigator.pushNamed(context, '/project_reports');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.receipt),
-              title: const Text('Invoices'),
-              onTap: () {
-                Navigator.pushNamed(context, '/invoices');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.chat),
-              title: const Text('Chats'),
-              onTap: () {
-                Navigator.pushNamed(context, '/project_chat');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text('Logout'),
-              onTap: () {
-                Navigator.pushNamed(context, '/login');
-              },
             ),
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Project Tools',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Center(
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    _buildDashboardCard(
-                        context, 'Projects', Icons.business, Colors.blue, '/projects'),
-                    _buildDashboardCard(
-                        context, 'Time-cards', Icons.access_time, Colors.red, '/time_cards'),
-                    _buildDashboardCard(context, 'Gallery', Icons.photo, Colors.green, '/gallery'),
-                    _buildDashboardCard(
-                        context, 'Tasks', Icons.assignment, Colors.blue, '/task_management'),
-                    _buildDashboardCard(context, 'Reports', Icons.report, Colors.blue, '/reports'),
-                    _buildDashboardCard(context, 'Invoices', Icons.receipt, Colors.red, '/invoices'),
-                    _buildDashboardCard(context, 'Crews', Icons.group, Colors.teal, '/crew_management'),
-                    _buildDashboardCard(
-                        context, 'Chats', Icons.chat, Colors.amber, '/project_chat'),
-                    _buildDashboardCard(
-                        context, 'Equipment', Icons.construction, Colors.blue, '/equipment'),
-                    _buildDashboardCard(
-                        context, 'Materials', Icons.production_quantity_limits, Colors.pink, '/materials'),
-                    _buildDashboardCard(context, 'Items', Icons.list, Colors.teal, '/items'),
-                    _buildDashboardCard(
-                        context, 'Incidents', Icons.safety_check, Colors.amber, '/incidents'),
-                    _buildDashboardCard(
-                        context, 'Docs', Icons.document_scanner, Colors.pink, '/document_management'),
-                    _buildDashboardCard(
-                        context, 'Contacts', Icons.contacts_rounded, Colors.pink, '/contacts'),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/create_project');
+          Navigator.pop(context); // Navigate back to ProjectDetailsScreen
         },
-        tooltip: 'Create Project',
+        tooltip: 'Back to Project Details',
         backgroundColor: Colors.orange,
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.arrow_back),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
@@ -163,38 +87,28 @@ class DashboardScreen extends StatelessWidget {
         audioPlayer.play(AssetSource('assets/sounds/buttonclick-1.wav'));
         Navigator.pushNamed(context, route);
       },
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-            decoration: BoxDecoration(
-              color: Colors.white54,
-              borderRadius: BorderRadius.circular(8.0),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 4.0,
-                  spreadRadius: 1.0,
-                  offset: Offset(2.0, 2.0),
-                ),
-              ],
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 64, color: color),
+            const SizedBox(height: 12),
+            Text(
+              title,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Roboto', // Using Roboto font
+              ),
+              textAlign: TextAlign.center,
             ),
-            child: Container(
-              padding: const EdgeInsets.all(16.0),
-              child: Icon(icon, size: 50, color: color),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

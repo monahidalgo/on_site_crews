@@ -1,86 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../providers/materials_provider.dart';
-import '../packages/project_material.dart';
 
-class MaterialsScreen extends StatelessWidget {
-  const MaterialsScreen({super.key});
+class MaterialsScreen extends StatefulWidget {
+  @override
+  _MaterialsScreenState createState() => _MaterialsScreenState();
+}
+
+class _MaterialsScreenState extends State<MaterialsScreen> {
+  final List<String> _materials = ['Wood', 'Concrete', 'Steel', 'Glass'];
+  final Set<String> _selectedMaterials = {};
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Materials'),
+        actions: [
+          if (_selectedMaterials.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Center(
+                child: Text(
+                  '${_selectedMaterials.length} Item${_selectedMaterials.length > 1 ? 's' : ''} Picked',
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+        ],
       ),
-      body: Consumer<MaterialsProvider>(
-        builder: (context, materialsProvider, child) {
-          return ListView.builder(
-            itemCount: materialsProvider.materials.length,
-            itemBuilder: (context, index) {
-              final material = materialsProvider.materials[index];
-              return ListTile(
-                title: Text(material.name),
-                subtitle: Text('Quantity: ${material.quantity}'),
-              );
+      body: ListView.builder(
+        itemCount: _materials.length,
+        itemBuilder: (context, index) {
+          final material = _materials[index];
+          final isSelected = _selectedMaterials.contains(material);
+          return ListTile(
+            title: Text(material),
+            trailing: Icon(
+              isSelected ? Icons.check_box : Icons.check_box_outline_blank,
+              color: isSelected ? Colors.green : null,
+            ),
+            onTap: () {
+              setState(() {
+                if (isSelected) {
+                  _selectedMaterials.remove(material);
+                } else {
+                  _selectedMaterials.add(material);
+                }
+              });
             },
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _showAddMaterialDialog(context);
+          Navigator.pop(context, _selectedMaterials); // Return selected materials
         },
-        backgroundColor: Colors.blue,
-        child: const Icon(Icons.add), // Use Colors.blue here
+        tooltip: 'Done',
+        child: const Icon(Icons.done),
       ),
-    );
-  }
-
-  void _showAddMaterialDialog(BuildContext context) {
-    final nameController = TextEditingController();
-    final quantityController = TextEditingController();
-
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Add Material'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: nameController,
-                decoration: const InputDecoration(labelText: 'Name'),
-              ),
-              TextField(
-                controller: quantityController,
-                decoration: const InputDecoration(labelText: 'Quantity'),
-                keyboardType: TextInputType.number,
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                final name = nameController.text;
-                final quantity = int.tryParse(quantityController.text) ?? 0;
-                if (name.isNotEmpty && quantity > 0) {
-                  final material = ProjectMaterial(name: name, quantity: quantity);
-                  Provider.of<MaterialsProvider>(context, listen: false).addMaterial(material);
-                  Navigator.of(context).pop();
-                }
-              },
-              child: const Text('Add'),
-            ),
-          ],
-        );
-      },
     );
   }
 }
