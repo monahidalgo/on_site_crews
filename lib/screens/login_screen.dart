@@ -13,17 +13,17 @@ class LoginScreen extends StatelessWidget {
         children: [
           // Logo at the top
           Padding(
-            padding: const EdgeInsets.only(top: 5.0, bottom: 2.0),
+            padding: const EdgeInsets.only(top: 1.0, bottom: 2.0),
             child: Image.asset(
               'assets/images/sitelogo.png',
-              height: 500, // Adjust the logo height as needed
+              height: 600, // Adjust the logo height as needed
               fit: BoxFit.contain,
             ),
           ),
           // Scrollable login form
           Expanded(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(5.0),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 400),
                 child: Column(
@@ -56,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepOrange,
+                        backgroundColor: Colors.blueAccent,
                       ),
                       child: const Text(
                         'Login',

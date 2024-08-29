@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
         '/time_cards': (context) => const TimeCardsScreen(),
         '/gallery': (context) => const GalleryScreen(),
         '/projects': (context) => const ProjectsScreen(),
-        '/materials': (context) => MaterialsScreen(),
+        '/materials': (context) => const MaterialsScreen(),
         '/crew_management': (context) => const CrewManagementScreen(),
         '/employee_management': (context) => const EmployeeManagementScreen(),
         '/project_detail': (context) => ProjectDetailsScreen(

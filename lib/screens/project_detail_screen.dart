@@ -60,7 +60,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                     ),
                   ],
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Add Project Tools',
                     style: TextStyle(
@@ -73,7 +73,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Text(
+            const Text(
               'Project Information:',
               style: TextStyle(
                 fontSize: 18,

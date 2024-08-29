@@ -123,7 +123,7 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
             Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
               child: Center(
-                child: Container(
+                child: SizedBox(
                   width: 200, // Adjust width here
                   child: ElevatedButton(
                     onPressed: _createProject,
