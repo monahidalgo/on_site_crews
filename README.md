@@ -52,7 +52,7 @@ feel free to reach out!
 
 Contributions are also welcome in the form of bug reports, feature suggestions, or improvements to the documentation.
 
-If you'd like to discuss collaboration opportunities, please contact me at [monaego@outlook.com].
+If you'd like to discuss collaboration opportunities, please contact me at [monaego@live.com].
 
 ## Contact
 For inquiries or to discuss mobile app development needs, please reach out:
