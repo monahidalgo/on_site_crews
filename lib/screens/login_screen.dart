@@ -15,8 +15,8 @@ class LoginScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 1.0, bottom: 2.0),
             child: Image.asset(
-              'assets/images/sitelogo.png',
-              height: 600, // Adjust the logo height as needed
+              'assets/images/onsiteapp.png',
+              height: 400, // Adjust the logo height as needed
               fit: BoxFit.contain,
             ),
           ),
@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                         fillColor: Colors.white70, // Slightly transparent background
                       ),
                     ),
-                    const SizedBox(height: 10.0),
+                    const SizedBox(height: 12.0),
                     TextFormField(
                       controller: _passwordController,
                       decoration: const InputDecoration(
@@ -56,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueAccent,
+                        backgroundColor: Colors.blueGrey,
                       ),
                       child: const Text(
                         'Login',

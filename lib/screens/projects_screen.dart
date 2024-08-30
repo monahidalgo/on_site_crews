@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:on_site_crews/screens/create_project_screen.dart';
 import 'package:on_site_crews/screens/project_detail_screen.dart';
+import 'package:on_site_crews/screens/profile_screen.dart'; // Import ProfileScreen
 
 class ProjectsScreen extends StatefulWidget {
   const ProjectsScreen({super.key});
@@ -19,7 +20,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   ];
 
   // Customizable color for the background
-  final Color _backgroundColor = Colors.grey[900]!; // Neutral dark background
+  final Color _backgroundColor = Colors.grey[400]!; // Neutral dark background
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                 child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 14.0),
                   decoration: BoxDecoration(
-                    color: Colors.grey[500],
+                    color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(6.0),
                     boxShadow: const [
                       BoxShadow(
@@ -133,21 +134,38 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
               icon: Icons.home,
               label: 'Home',
               color: Colors.white,
+              onTap: () {
+                // Add navigation logic for Home
+              },
             ),
             _buildBottomNavIcon(
               icon: Icons.assignment,
               label: 'Activity',
               color: Colors.white,
+              onTap: () {
+                // Add navigation logic for Activity
+              },
             ),
             _buildBottomNavIcon(
               icon: Icons.chat,
               label: 'Chat',
               color: Colors.white,
+              onTap: () {
+                // Add navigation logic for Chat
+              },
             ),
             _buildBottomNavIcon(
               icon: Icons.account_circle_outlined,
               label: 'Account',
               color: Colors.white,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProfileScreen(),
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -159,11 +177,10 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
     required IconData icon,
     required String label,
     required Color color,
+    required VoidCallback onTap,
   }) {
     return GestureDetector(
-      onTap: () {
-        // Add the desired functionality for the bubble button effect here
-      },
+      onTap: onTap,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
