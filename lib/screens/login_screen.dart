@@ -13,10 +13,10 @@ class LoginScreen extends StatelessWidget {
         children: [
           // Logo at the top
           Padding(
-            padding: const EdgeInsets.only(top: 1.0, bottom: 2.0),
+            padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
             child: Image.asset(
-              'assets/images/onsiteapp.png',
-              height: 300, // Adjust the logo height as needed
+              'assets/images/sitelogo.png',
+              height: 500, // Adjust the logo height as needed
               fit: BoxFit.contain,
             ),
           ),

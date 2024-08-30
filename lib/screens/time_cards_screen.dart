@@ -1,423 +1,359 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 
-class TimeCardsScreen extends StatelessWidget {
+class TimeCardsScreen extends StatefulWidget {
   const TimeCardsScreen({super.key});
 
   @override
+  _TimeCardsScreenState createState() => _TimeCardsScreenState();
+}
+
+class _TimeCardsScreenState extends State<TimeCardsScreen> {
+  final Color _backgroundColor = Colors.grey[400]!;
+  final List<Map<String, dynamic>> timeCards = [
+    {
+      'date': '08/29/2024',
+      'hours': '8:00 - 16:00',
+      'break': '1 hour',
+      'totalHours': '7 hours',
+      'project': 'Sherman Oaks Mall',
+      'task': 'Interior Painting',
+      'isRunning': false,
+      'elapsedTime': Duration(),
+      'timer': null,
+    },
+    {
+      'date': '08/28/2024',
+      'hours': '9:00 - 17:00',
+      'break': '30 mins',
+      'totalHours': '7.5 hours',
+      'project': 'Bilt Soft',
+      'task': 'Roof Inspection',
+      'isRunning': false,
+      'elapsedTime': Duration(),
+      'timer': null,
+    },
+    // Add more time card data as needed
+  ];
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Time Cards'),
-        backgroundColor: Colors.orange,
+        title: const Text(
+          'Time Cards',
+          style: TextStyle(fontFamily: 'Roboto'),
+        ),
+        backgroundColor: Colors.blueGrey,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // Navigate back to the previous screen
+          },
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            GestureDetector(
+      body: Container(
+        color: _backgroundColor,
+        child: ListView.builder(
+          itemCount: timeCards.length,
+          itemBuilder: (context, index) {
+            final timeCard = timeCards[index];
+            final color = _getProjectColor(timeCard['project']);
+
+            return GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const WeeklyTimeCardsScreen()),
-                );
+                // Add logic to view/edit details of the time card
               },
-              child: const Card(
-                elevation: 4.0,
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Icon(Icons.calendar_today, color: Colors.blue),
-                      SizedBox(width: 16.0),
-                      Column(
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 14.0),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(6.0),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black38,
+                      blurRadius: 2.0,
+                      spreadRadius: 1.0,
+                      offset: Offset(1.0, 1.0),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    ListTile(
+                      contentPadding: const EdgeInsets.all(12.0),
+                      leading: CircleAvatar(
+                        backgroundColor: color,
+                        child: Text(
+                          timeCard['project'][0],
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Roboto',
+                          ),
+                        ),
+                      ),
+                      title: Text(
+                        timeCard['project'],
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Roboto',
+                        ),
+                      ),
+                      subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text('Date: ${timeCard['date']}'),
+                          Text('Task: ${timeCard['task']}'),
+                          Text('Worked Hours: ${timeCard['hours']}'),
+                          Text('Break Time: ${timeCard['break']}'),
                           Text(
-                            'Weekly Time-cards',
-                            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 8.0),
-                          Text(
-                            'Monday - Friday',
-                            style: TextStyle(fontSize: 16.0),
-                          ),
-                          SizedBox(height: 8.0),
-                          Text(
-                            '08:00 AM - 05:00 PM',
-                            style: TextStyle(fontSize: 16.0),
+                            'Total: ${timeCard['totalHours']}',
+                            style: const TextStyle(
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueGrey,
+                              fontFamily: 'Roboto',
+                            ),
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MonthlyTimeCardsScreen()),
-                );
-              },
-              child: const Card(
-                elevation: 4.0,
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Icon(Icons.calendar_view_month, color: Colors.blue),
-                      SizedBox(width: 16.0),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Monthly Time-cards',
-                            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 8.0),
-                          Text(
-                            'Last day of the month',
-                            style: TextStyle(fontSize: 16.0),
-                          ),
-                          SizedBox(height: 8.0),
-                          Text(
-                            '08:00 AM - 05:00 PM',
-                            style: TextStyle(fontSize: 16.0),
-                          ),
-                        ],
+                      trailing: IconButton(
+                        icon: const Icon(Icons.edit, color: Colors.blueGrey),
+                        onPressed: () {
+                          // Logic to edit the time card details
+                        },
                       ),
-                    ],
-                  ),
+                    ),
+                    _buildTimerSection(timeCard, index),
+                  ],
                 ),
               ),
-            ),
-            const SizedBox(height: 16.0),
-            const Center(
-              child: Text(
-                'Full Time-cards Feature Coming Soon!',
-                style: TextStyle(fontSize: 16.0, color: Colors.grey),
+            );
+          },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _showCreateTimeCardDialog();
+        },
+        backgroundColor: Colors.blueGrey,
+        child: const Icon(Icons.add),
+      ),
+      bottomNavigationBar: _buildBottomAppBar(),
+    );
+  }
+
+  Widget _buildTimerSection(Map<String, dynamic> timeCard, int index) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            _formatDuration(timeCard['elapsedTime']),
+            style: const TextStyle(fontSize: 14.0, fontFamily: 'Roboto'),
+          ),
+          Row(
+            children: [
+              IconButton(
+                icon: Icon(
+                  timeCard['isRunning'] ? Icons.pause : Icons.play_arrow,
+                  color: Colors.blueGrey,
+                ),
+                onPressed: () {
+                  setState(() {
+                    if (timeCard['isRunning']) {
+                      timeCard['isRunning'] = false;
+                      timeCard['timer']?.cancel();
+                    } else {
+                      timeCard['isRunning'] = true;
+                      timeCard['timer'] = Timer.periodic(Duration(seconds: 1), (timer) {
+                        setState(() {
+                          timeCard['elapsedTime'] = timeCard['elapsedTime']! + Duration(seconds: 1);
+                        });
+                      });
+                    }
+                  });
+                },
               ),
+              IconButton(
+                icon: const Icon(Icons.stop, color: Colors.red),
+                onPressed: () {
+                  setState(() {
+                    timeCard['isRunning'] = false;
+                    timeCard['timer']?.cancel();
+                    timeCard['elapsedTime'] = Duration();
+                  });
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formatDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    final hours = twoDigits(duration.inHours);
+    final minutes = twoDigits(duration.inMinutes.remainder(60));
+    final seconds = twoDigits(duration.inSeconds.remainder(60));
+    return "$hours:$minutes:$seconds";
+  }
+
+  void _showCreateTimeCardDialog() {
+    final _projectController = TextEditingController();
+    final _taskController = TextEditingController();
+    final _dateController = TextEditingController();
+    final _hoursController = TextEditingController();
+    final _breakController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Create Time Card'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: _projectController,
+                decoration: const InputDecoration(labelText: 'Project Name'),
+              ),
+              TextField(
+                controller: _taskController,
+                decoration: const InputDecoration(labelText: 'Task'),
+              ),
+              TextField(
+                controller: _dateController,
+                decoration: const InputDecoration(labelText: 'Date (MM/DD/YYYY)'),
+              ),
+              TextField(
+                controller: _hoursController,
+                decoration: const InputDecoration(labelText: 'Worked Hours'),
+              ),
+              TextField(
+                controller: _breakController,
+                decoration: const InputDecoration(labelText: 'Break Time'),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  timeCards.add({
+                    'date': _dateController.text,
+                    'hours': _hoursController.text,
+                    'break': _breakController.text,
+                    'totalHours': '0 hours', // Placeholder, update as needed
+                    'project': _projectController.text,
+                    'task': _taskController.text,
+                    'isRunning': false,
+                    'elapsedTime': Duration(),
+                    'timer': null,
+                  });
+                });
+                Navigator.pop(context);
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildBottomAppBar() {
+    return BottomAppBar(
+      shape: const CircularNotchedRectangle(),
+      color: Colors.grey[850],
+      child: IconTheme(
+        data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            _buildBottomNavIcon(
+              icon: Icons.home,
+              label: 'Home',
+              color: Colors.white,
+              onTap: () {
+                // Add navigation logic for Home
+              },
+            ),
+            _buildBottomNavIcon(
+              icon: Icons.assignment,
+              label: 'Activity',
+              color: Colors.white,
+              onTap: () {
+                // Add navigation logic for Activity
+              },
+            ),
+            _buildBottomNavIcon(
+              icon: Icons.chat,
+              label: 'Chat',
+              color: Colors.white,
+              onTap: () {
+                // Add navigation logic for Chat
+              },
+            ),
+            _buildBottomNavIcon(
+              icon: Icons.account_circle_outlined,
+              label: 'Account',
+              color: Colors.white,
+              onTap: () {
+                // Add navigation logic for Account
+              },
             ),
           ],
         ),
       ),
     );
   }
-}
 
-class WeeklyTimeCardsScreen extends StatefulWidget {
-  const WeeklyTimeCardsScreen({super.key});
-
-  @override
-  _WeeklyTimeCardsScreenState createState() => _WeeklyTimeCardsScreenState();
-}
-
-class _WeeklyTimeCardsScreenState extends State<WeeklyTimeCardsScreen> {
-  DateTime? _clockInTime;
-  DateTime? _clockOutTime;
-  Position? _clockInPosition;
-  Position? _clockOutPosition;
-  StreamSubscription<Position>? _positionStream;
-  Timer? _timer;
-  int _elapsedSeconds = 0;
-
-  Future<Position> _getCurrentLocation() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error('Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    return await Geolocator.getCurrentPosition();
-  }
-
-  void _startTimer() {
-    _elapsedSeconds = 0;
-    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-      setState(() {
-        _elapsedSeconds++;
-      });
-    });
-  }
-
-  void _stopTimer() {
-    _timer?.cancel();
-  }
-
-  void _clockIn() async {
-    Position position = await _getCurrentLocation();
-    setState(() {
-      _clockInTime = DateTime.now();
-      _clockInPosition = position;
-      _startTimer();
-    });
-
-    _positionStream = Geolocator.getPositionStream(
-      locationSettings: const LocationSettings(
-        accuracy: LocationAccuracy.high,
-        distanceFilter: 10,
-      ),
-    ).listen((Position position) {
-      setState(() {
-        _clockInPosition = position;
-      });
-    });
-  }
-
-  void _clockOut() async {
-    Position position = await _getCurrentLocation();
-    setState(() {
-      _clockOutTime = DateTime.now();
-      _clockOutPosition = position;
-      _stopTimer();
-    });
-
-    _positionStream?.cancel();
-  }
-
-  @override
-  void dispose() {
-    _positionStream?.cancel();
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  String _formatElapsedTime() {
-    int hours = _elapsedSeconds ~/ 3600;
-    int minutes = (_elapsedSeconds % 3600) ~/ 60;
-    int seconds = _elapsedSeconds % 60;
-    return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Weekly Time-cards'),
-        backgroundColor: Colors.orange,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ElevatedButton(
-              onPressed: _clockIn,
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white, backgroundColor: Colors.green,
-                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-              ),
-              child: const Text('Clock In'),
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: _clockOut,
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white, backgroundColor: Colors.red,
-                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-              ),
-              child: const Text('Clock Out'),
-            ),
-            const SizedBox(height: 16.0),
-            Text(
-              _clockInTime == null
-                  ? 'Not Clocked In'
-                  : 'Clocked In: ${_clockInTime.toString()} at (${_clockInPosition?.latitude}, ${_clockInPosition?.longitude})',
-              style: const TextStyle(fontSize: 16.0),
-            ),
-            const SizedBox(height: 8.0),
-            Text(
-              _clockOutTime == null
-                  ? 'Not Clocked Out'
-                  : 'Clocked Out: ${_clockOutTime.toString()} at (${_clockOutPosition?.latitude}, ${_clockOutPosition?.longitude})',
-              style: const TextStyle(fontSize: 16.0),
-            ),
-            const SizedBox(height: 16.0),
-            if (_clockInTime != null && _clockOutTime == null)
-              Text(
-                'Elapsed Time: ${_formatElapsedTime()}',
-                style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-              ),
-          ],
-        ),
+  Widget _buildBottomNavIcon({
+    required IconData icon,
+    required String label,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            color: color,
+          ),
+          Text(
+            label,
+            style: TextStyle(color: color, fontFamily: 'Roboto'),
+          ),
+        ],
       ),
     );
   }
-}
 
-class MonthlyTimeCardsScreen extends StatefulWidget {
-  const MonthlyTimeCardsScreen({super.key});
-
-  @override
-  _MonthlyTimeCardsScreenState createState() => _MonthlyTimeCardsScreenState();
-}
-
-class _MonthlyTimeCardsScreenState extends State<MonthlyTimeCardsScreen> {
-  DateTime? _clockInTime;
-  DateTime? _clockOutTime;
-  Position? _clockInPosition;
-  Position? _clockOutPosition;
-  StreamSubscription<Position>? _positionStream;
-  Timer? _timer;
-  int _elapsedSeconds = 0;
-
-  Future<Position> _getCurrentLocation() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error('Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    return await Geolocator.getCurrentPosition();
-  }
-
-  void _startTimer() {
-    _elapsedSeconds = 0;
-    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-      setState(() {
-        _elapsedSeconds++;
-      });
-    });
-  }
-
-  void _stopTimer() {
-    _timer?.cancel();
-  }
-
-  void _clockIn() async {
-    Position position = await _getCurrentLocation();
-    setState(() {
-      _clockInTime = DateTime.now();
-      _clockInPosition = position;
-      _startTimer();
-    });
-
-    _positionStream = Geolocator.getPositionStream(
-      locationSettings: const LocationSettings(
-        accuracy: LocationAccuracy.high,
-        distanceFilter: 10,
-      ),
-    ).listen((Position position) {
-      setState(() {
-        _clockInPosition = position;
-      });
-    });
-  }
-
-  void _clockOut() async {
-    Position position = await _getCurrentLocation();
-    setState(() {
-      _clockOutTime = DateTime.now();
-      _clockOutPosition = position;
-      _stopTimer();
-    });
-
-    _positionStream?.cancel();
-  }
-
-  @override
-  void dispose() {
-    _positionStream?.cancel();
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  String _formatElapsedTime() {
-    int hours = _elapsedSeconds ~/ 3600;
-    int minutes = (_elapsedSeconds % 3600) ~/ 60;
-    int seconds = _elapsedSeconds % 60;
-    return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Monthly Time-cards'),
-        backgroundColor: Colors.orange,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ElevatedButton(
-              onPressed: _clockIn,
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white, backgroundColor: Colors.green,
-                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-              ),
-              child: const Text('Clock In'),
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: _clockOut,
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white, backgroundColor: Colors.red,
-                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-              ),
-              child: const Text('Clock Out'),
-            ),
-            const SizedBox(height: 16.0),
-            Text(
-              _clockInTime == null
-                  ? 'Not Clocked In'
-                  : 'Clocked In: ${_clockInTime.toString()} at (${_clockInPosition?.latitude}, ${_clockInPosition?.longitude})',
-              style: const TextStyle(fontSize: 16.0),
-            ),
-            const SizedBox(height: 8.0),
-            Text(
-              _clockOutTime == null
-                  ? 'Not Clocked Out'
-                  : 'Clocked Out: ${_clockOutTime.toString()} at (${_clockOutPosition?.latitude}, ${_clockOutPosition?.longitude})',
-              style: const TextStyle(fontSize: 16.0),
-            ),
-            const SizedBox(height: 16.0),
-            if (_clockInTime != null && _clockOutTime == null)
-              Text(
-                'Elapsed Time: ${_formatElapsedTime()}',
-                style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-              ),
-          ],
-        ),
-      ),
-    );
+  Color _getProjectColor(String projectName) {
+    final colors = [
+      Colors.red,
+      Colors.blue,
+      Colors.green,
+      Colors.orange,
+      Colors.purple,
+      Colors.teal,
+      Colors.cyan,
+      Colors.amber,
+    ];
+    return colors[projectName.codeUnitAt(0) % colors.length];
   }
 }

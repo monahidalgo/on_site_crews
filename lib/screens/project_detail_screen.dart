@@ -113,9 +113,9 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
             ),
           ),
           const SizedBox(height: 8),
-          Text('Start Date: June 1, 2024', style: TextStyle(fontSize: 14)),
-          Text('End Date: December 15, 2024', style: TextStyle(fontSize: 14)),
-          Text('Status: In Progress', style: TextStyle(fontSize: 14)),
+          const Text('Start Date: June 1, 2024', style: TextStyle(fontSize: 14)),
+          const Text('End Date: December 15, 2024', style: TextStyle(fontSize: 14)),
+          const Text('Status: In Progress', style: TextStyle(fontSize: 14)),
         ],
       ),
     );
