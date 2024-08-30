@@ -11,12 +11,13 @@ class ProjectsScreen extends StatefulWidget {
 }
 
 class _ProjectsScreenState extends State<ProjectsScreen> {
+  // Updated projects list with sections
   List<Map<String, String>> projects = [
     {'name': 'Sherman Oaks Mall', 'description': 'Bring in H Salt inside'},
     {'name': 'Bilt Soft', 'description': 'Media Offices'},
     {'name': 'Del taco', 'description': 'Renovate'},
     {'name': 'Disney Studios', 'description': 'Renovate'},
-    {'name': 'Hospital Apps and websites', 'description': 'Development'},
+    {'name': 'Hospital Apps and Websites', 'description': 'Development'},
   ];
 
   // Customizable color for the background
@@ -109,6 +110,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
 
           if (newProject != null) {
             setState(() {
+              // Add the new project to the end of the list
               projects.add(newProject);
             });
           }

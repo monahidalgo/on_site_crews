@@ -14,8 +14,11 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.project?['name'] ?? 'Project Details'),
-        backgroundColor: Colors.blueAccent,
+        title: Text(
+          widget.project?['name'] ?? 'Project Details',
+          style: const TextStyle(fontFamily: 'Roboto'),
+        ),
+        backgroundColor: Colors.blueGrey,
         actions: [
           IconButton(
             icon: const Icon(Icons.close),
@@ -30,30 +33,27 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Project Details',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            // Project Overview Section
+            _buildProjectOverview(),
             const SizedBox(height: 20),
+
+            // Project Tools Button
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(
                   context,
                   '/dashboard',
-                  arguments: widget.project, // Pass project details if needed
+                  arguments: widget.project,
                 );
               },
               child: Container(
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: Colors.blueGrey,
                   borderRadius: BorderRadius.circular(8.0),
                   boxShadow: const [
                     BoxShadow(
-                      color: Colors.black12,
+                      color: Colors.black38,
                       blurRadius: 4.0,
                       spreadRadius: 1.0,
                       offset: Offset(2.0, 2.0),
@@ -64,25 +64,94 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                   child: Text(
                     'Add Project Tools',
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Roboto',
                     ),
                   ),
                 ),
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Project Information:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            // Include more details or project-specific data here
+
+            // Activity Log
+            _buildActivityLog(),
+
+            // Add more sections as needed
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildProjectOverview() {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(8.0),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 4.0,
+            spreadRadius: 1.0,
+            offset: Offset(2.0, 2.0),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Project Overview',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.blueGrey[800],
+              fontFamily: 'Roboto',
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text('Start Date: June 1, 2024', style: TextStyle(fontSize: 14)),
+          Text('End Date: December 15, 2024', style: TextStyle(fontSize: 14)),
+          Text('Status: In Progress', style: TextStyle(fontSize: 14)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActivityLog() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Recent Activities',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueGrey[800],
+            fontFamily: 'Roboto',
+          ),
+        ),
+        const SizedBox(height: 8),
+        // Sample activities, replace with real data
+        _buildActivityItem('Completed Task: Foundation work.'),
+        _buildActivityItem('Added Report: Weekly Progress Report.'),
+        _buildActivityItem('Uploaded new blueprint.'),
+      ],
+    );
+  }
+
+  Widget _buildActivityItem(String activity) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        children: [
+          Icon(Icons.check_circle_outline, color: Colors.blueGrey[800]),
+          const SizedBox(width: 8),
+          Expanded(child: Text(activity)),
+        ],
       ),
     );
   }
