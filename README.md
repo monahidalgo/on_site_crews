@@ -65,6 +65,7 @@ For inquiries or to discuss mobile app development needs, please reach out:
 
 - Dashboard image of Project Tools
 <img src="https://github.com/user-attachments/assets/7e257e69-0688-4319-b989-f668fa20057f" alt="Logo" style="width: 250px; height: auto;">
+<img src="https://github.com/user-attachments/assets/92e4185c-54b2-41e0-9c97-431b76a93b11" alt="Logo" style="width: 250px; height: auto;">
 
 
 
