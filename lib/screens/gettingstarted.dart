@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class GettingStartedScreen extends StatefulWidget {
+  const GettingStartedScreen({super.key});
+
   @override
   _GettingStartedScreenState createState() => _GettingStartedScreenState();
 }
@@ -58,7 +60,7 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
               child: SmoothPageIndicator(
                 controller: _pageController,
                 count: 4,
-                effect: WormEffect(
+                effect: const WormEffect(
                   dotHeight: 10,
                   dotWidth: 10,
                   activeDotColor: Colors.orange,

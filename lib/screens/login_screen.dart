@@ -9,27 +9,31 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Logo at the top, with padding and adjusted size
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30.0),
-              child: Image.asset(
-                'assets/images/sitelogo.png',
-                width: 280,  // Adjust size to make it larger
-                height: 200,
-                fit: BoxFit.contain,
-              ),
+      resizeToAvoidBottomInset: false,  // Prevent the screen from resizing when the keyboard appears
+      body: Stack(
+        children: [
+          // Background logo
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Image.asset(
+              'assets/images/osclogo.png',
+              height: 500, // Adjust height to fit the background
+              fit: BoxFit.cover,
             ),
-            // Login form
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          ),
+          // Login form
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 30), // Padding to avoid overflow
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 400),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
+                    // Username field
                     TextFormField(
                       controller: _usernameController,
                       decoration: const InputDecoration(
@@ -40,6 +44,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16.0),
+                    // Password field
                     TextFormField(
                       controller: _passwordController,
                       decoration: const InputDecoration(
@@ -51,6 +56,7 @@ class LoginScreen extends StatelessWidget {
                       obscureText: true,
                     ),
                     const SizedBox(height: 20.0),
+                    // Login button
                     ElevatedButton(
                       onPressed: () {
                         if (_usernameController.text.isNotEmpty &&
@@ -68,16 +74,18 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 10.0),
+                    // Forgot password button
                     TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/forgot_password');
                       },
                       style: TextButton.styleFrom(
-                        foregroundColor: Colors.orange,
+                        foregroundColor: Colors.red,
                       ),
                       child: const Text("Forgot Password?"),
                     ),
                     const SizedBox(height: 10.0),
+                    // Create account section
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -93,7 +101,7 @@ class LoginScreen extends StatelessWidget {
                             "Create Account",
                             style: TextStyle(
                               fontSize: 16,
-                              color: Colors.orange,
+                              color: Colors.red,
                             ),
                           ),
                         ),
@@ -103,8 +111,8 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

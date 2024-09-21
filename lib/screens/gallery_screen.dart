@@ -98,8 +98,8 @@ class GalleryScreen extends StatelessWidget {
   }
 
   void _showUploadDialog(BuildContext context) {
-    final _titleController = TextEditingController();
-    final _descriptionController = TextEditingController();
+    final titleController = TextEditingController();
+    final descriptionController = TextEditingController();
 
     showDialog(
       context: context,
@@ -110,11 +110,11 @@ class GalleryScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                controller: _titleController,
+                controller: titleController,
                 decoration: const InputDecoration(labelText: 'Title'),
               ),
               TextField(
-                controller: _descriptionController,
+                controller: descriptionController,
                 decoration: const InputDecoration(labelText: 'Description'),
               ),
             ],

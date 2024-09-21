@@ -19,7 +19,7 @@ class _TimeCardsScreenState extends State<TimeCardsScreen> {
       'project': 'Sherman Oaks Mall',
       'task': 'Interior Painting',
       'isRunning': false,
-      'elapsedTime': Duration(),
+      'elapsedTime': const Duration(),
       'timer': null,
     },
     {
@@ -30,7 +30,7 @@ class _TimeCardsScreenState extends State<TimeCardsScreen> {
       'project': 'Bilt Soft',
       'task': 'Roof Inspection',
       'isRunning': false,
-      'elapsedTime': Duration(),
+      'elapsedTime': const Duration(),
       'timer': null,
     },
     // Add more time card data as needed
@@ -169,9 +169,9 @@ class _TimeCardsScreenState extends State<TimeCardsScreen> {
                       timeCard['timer']?.cancel();
                     } else {
                       timeCard['isRunning'] = true;
-                      timeCard['timer'] = Timer.periodic(Duration(seconds: 1), (timer) {
+                      timeCard['timer'] = Timer.periodic(const Duration(seconds: 1), (timer) {
                         setState(() {
-                          timeCard['elapsedTime'] = timeCard['elapsedTime']! + Duration(seconds: 1);
+                          timeCard['elapsedTime'] = timeCard['elapsedTime']! + const Duration(seconds: 1);
                         });
                       });
                     }
@@ -184,7 +184,7 @@ class _TimeCardsScreenState extends State<TimeCardsScreen> {
                   setState(() {
                     timeCard['isRunning'] = false;
                     timeCard['timer']?.cancel();
-                    timeCard['elapsedTime'] = Duration();
+                    timeCard['elapsedTime'] = const Duration();
                   });
                 },
               ),
@@ -204,11 +204,11 @@ class _TimeCardsScreenState extends State<TimeCardsScreen> {
   }
 
   void _showCreateTimeCardDialog() {
-    final _projectController = TextEditingController();
-    final _taskController = TextEditingController();
-    final _dateController = TextEditingController();
-    final _hoursController = TextEditingController();
-    final _breakController = TextEditingController();
+    final projectController = TextEditingController();
+    final taskController = TextEditingController();
+    final dateController = TextEditingController();
+    final hoursController = TextEditingController();
+    final breakController = TextEditingController();
 
     showDialog(
       context: context,
@@ -219,23 +219,23 @@ class _TimeCardsScreenState extends State<TimeCardsScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                controller: _projectController,
+                controller: projectController,
                 decoration: const InputDecoration(labelText: 'Project Name'),
               ),
               TextField(
-                controller: _taskController,
+                controller: taskController,
                 decoration: const InputDecoration(labelText: 'Task'),
               ),
               TextField(
-                controller: _dateController,
+                controller: dateController,
                 decoration: const InputDecoration(labelText: 'Date (MM/DD/YYYY)'),
               ),
               TextField(
-                controller: _hoursController,
+                controller: hoursController,
                 decoration: const InputDecoration(labelText: 'Worked Hours'),
               ),
               TextField(
-                controller: _breakController,
+                controller: breakController,
                 decoration: const InputDecoration(labelText: 'Break Time'),
               ),
             ],
@@ -251,14 +251,14 @@ class _TimeCardsScreenState extends State<TimeCardsScreen> {
               onPressed: () {
                 setState(() {
                   timeCards.add({
-                    'date': _dateController.text,
-                    'hours': _hoursController.text,
-                    'break': _breakController.text,
+                    'date': dateController.text,
+                    'hours': hoursController.text,
+                    'break': breakController.text,
                     'totalHours': '0 hours', // Placeholder, update as needed
-                    'project': _projectController.text,
-                    'task': _taskController.text,
+                    'project': projectController.text,
+                    'task': taskController.text,
                     'isRunning': false,
-                    'elapsedTime': Duration(),
+                    'elapsedTime': const Duration(),
                     'timer': null,
                   });
                 });

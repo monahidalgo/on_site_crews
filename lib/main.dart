@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/', // Start with the Getting Started screen
       routes: {
-        '/': (context) => GettingStartedScreen(), // Getting Started Screen
+        '/': (context) => const GettingStartedScreen(), // Getting Started Screen
         '/login': (context) => LoginScreen(),
         '/create_account': (context) => const CreateAccountScreen(),
         '/dashboard': (context) => DashboardScreen(),
