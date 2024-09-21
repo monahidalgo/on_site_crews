@@ -19,6 +19,7 @@ dependencies:
   google_maps_flutter: ^2.2.0
   image_picker_web: ^2.0.0
   google_fonts: ^4.0.4
+  smooth_page_indicator: ^1.0.0  # Check for the latest version
 
 
 

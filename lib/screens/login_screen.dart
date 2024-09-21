@@ -9,25 +9,26 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          // Logo at the top
-          Padding(
-            padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
-            child: Image.asset(
-              'assets/images/sitelogo.png',
-              height: 500, // Adjust the logo height as needed
-              fit: BoxFit.contain,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Logo at the top, with padding and adjusted size
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30.0),
+              child: Image.asset(
+                'assets/images/sitelogo.png',
+                width: 280,  // Adjust size to make it larger
+                height: 200,
+                fit: BoxFit.contain,
+              ),
             ),
-          ),
-          // Scrollable login form
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(5.0),
+            // Login form
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 400),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextFormField(
                       controller: _usernameController,
@@ -35,15 +36,17 @@ class LoginScreen extends StatelessWidget {
                         labelText: 'Username',
                         filled: true,
                         fillColor: Colors.white70, // Slightly transparent background
+                        border: OutlineInputBorder(),
                       ),
                     ),
-                    const SizedBox(height: 12.0),
+                    const SizedBox(height: 16.0),
                     TextFormField(
                       controller: _passwordController,
                       decoration: const InputDecoration(
                         labelText: 'Password',
                         filled: true,
                         fillColor: Colors.white70, // Slightly transparent background
+                        border: OutlineInputBorder(),
                       ),
                       obscureText: true,
                     ),
@@ -52,15 +55,16 @@ class LoginScreen extends StatelessWidget {
                       onPressed: () {
                         if (_usernameController.text.isNotEmpty &&
                             _passwordController.text.isNotEmpty) {
-                          Navigator.pushNamed(context, '/projects'); // Navigate to the next screen
+                          Navigator.pushNamed(context, '/projects');
                         }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blueGrey,
+                        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 40.0),
                       ),
                       child: const Text(
                         'Login',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ),
                     const SizedBox(height: 10.0),
@@ -74,18 +78,13 @@ class LoginScreen extends StatelessWidget {
                       child: const Text("Forgot Password?"),
                     ),
                     const SizedBox(height: 10.0),
-                    const Row(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           "Don't have an account? ",
                           style: TextStyle(fontSize: 16),
                         ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
                         TextButton(
                           onPressed: () {
                             Navigator.pushNamed(context, '/create_account');
@@ -104,8 +103,8 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

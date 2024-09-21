@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:on_site_crews/screens/crew_management_screen.dart';
-import 'package:on_site_crews/screens/employee_management_screen.dart';
-import 'package:on_site_crews/screens/project_detail_screen.dart';
+import 'package:on_site_crews/screens/gettingstarted.dart';
 import 'package:provider/provider.dart';
-import 'package:on_site_crews/screens/materials_screen.dart';
-import 'package:on_site_crews/screens/notifications_screen.dart';
-import 'package:on_site_crews/screens/projects_screen.dart';
-import 'package:on_site_crews/screens/time_cards_screen.dart';
-import 'package:on_site_crews/screens/gallery_screen.dart';
 import 'package:on_site_crews/screens/login_screen.dart';
 import 'package:on_site_crews/screens/create_account_screen.dart';
 import 'package:on_site_crews/screens/dashboard_screen.dart';
@@ -16,7 +9,17 @@ import 'package:on_site_crews/screens/task_management_screen.dart';
 import 'package:on_site_crews/screens/add_task_screen.dart';
 import 'package:on_site_crews/screens/chat_screen.dart';
 import 'package:on_site_crews/screens/document_management_screen.dart';
+import 'package:on_site_crews/screens/notifications_screen.dart';
 import 'package:on_site_crews/screens/profile_screen.dart';
+import 'package:on_site_crews/screens/time_cards_screen.dart';
+import 'package:on_site_crews/screens/gallery_screen.dart';
+import 'package:on_site_crews/screens/projects_screen.dart';
+import 'package:on_site_crews/screens/materials_screen.dart';
+import 'package:on_site_crews/screens/crew_management_screen.dart';
+import 'package:on_site_crews/screens/employee_management_screen.dart';
+import 'package:on_site_crews/screens/project_detail_screen.dart';
+
+// Import providers
 import 'package:on_site_crews/providers/materials_provider.dart';
 
 void main() {
@@ -44,8 +47,9 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Roboto',
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login', // Start with the login screen
+      initialRoute: '/', // Start with the Getting Started screen
       routes: {
+        '/': (context) => GettingStartedScreen(), // Getting Started Screen
         '/login': (context) => LoginScreen(),
         '/create_account': (context) => const CreateAccountScreen(),
         '/dashboard': (context) => DashboardScreen(),
