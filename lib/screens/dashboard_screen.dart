@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatelessWidget {
   final AudioPlayer audioPlayer = AudioPlayer();
@@ -43,53 +43,57 @@ class DashboardScreen extends StatelessWidget {
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
                 children: [
-                  _buildDashboardCard(
-                      context, 'Projects', Icons.business, Colors.blueGrey[700]!, '/projects'),
-                  _buildDashboardCard(
-                      context, 'Time-cards', Icons.access_time, Colors.blueGrey[600]!, '/time_cards'),
+                  _buildDashboardCard(context, 'Projects', Icons.business,
+                      Colors.blueGrey[700]!, '/projects'),
+                  _buildDashboardCard(context, 'Time-cards', Icons.access_time,
+                      Colors.blueGrey[600]!, '/time_cards'),
                   _buildDashboardCard(
                       context, 'Gallery', Icons.photo, Colors.teal, '/gallery'),
+                  _buildDashboardCard(context, 'Tasks', Icons.assignment,
+                      Colors.blueGrey[500]!, '/task_management'),
+                  _buildDashboardCard(context, 'Reports', Icons.report,
+                      Colors.blueGrey[400]!, '/reports'),
+                  _buildDashboardCard(context, 'Invoices', Icons.receipt,
+                      Colors.redAccent, '/invoices'),
+                  _buildDashboardCard(context, 'Crews', Icons.group,
+                      Colors.teal[700]!, '/crew_management'),
                   _buildDashboardCard(
-                      context, 'Tasks', Icons.assignment, Colors.blueGrey[500]!, '/task_management'),
+                      context,
+                      'Chats',
+                      Icons.chat_bubble_outline,
+                      Colors.blueAccent,
+                      '/project_chat'),
+                  _buildDashboardCard(context, 'Equipment', Icons.construction,
+                      Colors.grey[700]!, '/equipment'),
                   _buildDashboardCard(
-                      context, 'Reports', Icons.report, Colors.blueGrey[400]!, '/reports'),
+                      context,
+                      'Materials',
+                      Icons.build_circle_outlined,
+                      Colors.pinkAccent,
+                      '/materials'),
+                  _buildDashboardCard(context, 'Items',
+                      Icons.format_list_bulleted, Colors.teal[500]!, '/items'),
                   _buildDashboardCard(
-                      context, 'Invoices', Icons.receipt, Colors.redAccent, '/invoices'),
-                  _buildDashboardCard(
-                      context, 'Crews', Icons.group, Colors.teal[700]!, '/crew_management'),
-                  _buildDashboardCard(
-                      context, 'Chats', Icons.chat_bubble_outline, Colors.blueAccent, '/project_chat'),
-                  _buildDashboardCard(
-                      context, 'Equipment', Icons.construction, Colors.grey[700]!, '/equipment'),
-                  _buildDashboardCard(
-                      context, 'Materials', Icons.build_circle_outlined, Colors.pinkAccent, '/materials'),
-                  _buildDashboardCard(
-                      context, 'Items', Icons.format_list_bulleted, Colors.teal[500]!, '/items'),
-                  _buildDashboardCard(
-                      context, 'Incidents', Icons.warning_amber_rounded, Colors.orangeAccent, '/incidents'),
-                  _buildDashboardCard(
-                      context, 'Docs', Icons.document_scanner, Colors.purpleAccent, '/document_management'),
-                  _buildDashboardCard(
-                      context, 'Contacts', Icons.contacts, Colors.indigo, '/contacts'),
+                      context,
+                      'Incidents',
+                      Icons.warning_amber_rounded,
+                      Colors.orangeAccent,
+                      '/incidents'),
+                  _buildDashboardCard(context, 'Docs', Icons.document_scanner,
+                      Colors.purpleAccent, '/document_management'),
+                  _buildDashboardCard(context, 'Contacts', Icons.contacts,
+                      Colors.indigo, '/contacts'),
                 ],
               ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        tooltip: 'Back to Project Details',
-        backgroundColor: Colors.blueGrey, // Updated to match screen theme
-        child: const Icon(Icons.arrow_back, color: Colors.white),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 
-  Widget _buildDashboardCard(BuildContext context, String title, IconData icon, Color color, String route) {
+  Widget _buildDashboardCard(BuildContext context, String title, IconData icon,
+      Color color, String route) {
     return GestureDetector(
       onTap: () {
         audioPlayer.play(AssetSource('assets/sounds/buttonclick-1.wav'));

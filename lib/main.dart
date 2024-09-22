@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:on_site_crews/screens/gettingstarted.dart';
-import 'package:provider/provider.dart';
-import 'package:on_site_crews/screens/login_screen.dart';
-import 'package:on_site_crews/screens/create_account_screen.dart';
-import 'package:on_site_crews/screens/dashboard_screen.dart';
-import 'package:on_site_crews/screens/create_project_screen.dart';
-import 'package:on_site_crews/screens/task_management_screen.dart';
-import 'package:on_site_crews/screens/add_task_screen.dart';
-import 'package:on_site_crews/screens/chat_screen.dart';
-import 'package:on_site_crews/screens/document_management_screen.dart';
-import 'package:on_site_crews/screens/notifications_screen.dart';
-import 'package:on_site_crews/screens/profile_screen.dart';
-import 'package:on_site_crews/screens/time_cards_screen.dart';
-import 'package:on_site_crews/screens/gallery_screen.dart';
-import 'package:on_site_crews/screens/projects_screen.dart';
-import 'package:on_site_crews/screens/materials_screen.dart';
-import 'package:on_site_crews/screens/crew_management_screen.dart';
-import 'package:on_site_crews/screens/employee_management_screen.dart';
-import 'package:on_site_crews/screens/project_detail_screen.dart';
-
 // Import providers
 import 'package:on_site_crews/providers/materials_provider.dart';
+import 'package:on_site_crews/screens/NotesScreen.dart';
+import 'package:on_site_crews/screens/add_task_screen.dart';
+import 'package:on_site_crews/screens/chat_screen.dart';
+import 'package:on_site_crews/screens/create_account_screen.dart';
+import 'package:on_site_crews/screens/create_project_screen.dart';
+import 'package:on_site_crews/screens/crew_management_screen.dart';
+import 'package:on_site_crews/screens/dashboard_screen.dart';
+import 'package:on_site_crews/screens/document_management_screen.dart';
+import 'package:on_site_crews/screens/employee_management_screen.dart';
+import 'package:on_site_crews/screens/gallery_screen.dart';
+import 'package:on_site_crews/screens/gettingstarted.dart';
+import 'package:on_site_crews/screens/login_screen.dart';
+import 'package:on_site_crews/screens/materials_screen.dart';
+import 'package:on_site_crews/screens/notifications_screen.dart';
+import 'package:on_site_crews/screens/profile_screen.dart';
+import 'package:on_site_crews/screens/project_detail_screen.dart';
+import 'package:on_site_crews/screens/projects_screen.dart';
+import 'package:on_site_crews/screens/task_management_screen.dart';
+import 'package:on_site_crews/screens/time_cards_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
@@ -49,7 +49,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/', // Start with the Getting Started screen
       routes: {
-        '/': (context) => const GettingStartedScreen(), // Getting Started Screen
+        '/': (context) =>
+            const GettingStartedScreen(), // Getting Started Screen
         '/login': (context) => LoginScreen(),
         '/create_account': (context) => const CreateAccountScreen(),
         '/dashboard': (context) => DashboardScreen(),
@@ -65,10 +66,12 @@ class MyApp extends StatelessWidget {
         '/projects': (context) => const ProjectsScreen(),
         '/materials': (context) => const MaterialsScreen(),
         '/crew_management': (context) => const CrewManagementScreen(),
+        '/notes': (context) => const NotesScreen(),
         '/employee_management': (context) => const EmployeeManagementScreen(),
         '/project_detail': (context) => ProjectDetailsScreen(
-          project: ModalRoute.of(context)!.settings.arguments as Map<String, String>?,
-        ),
+              project: ModalRoute.of(context)!.settings.arguments
+                  as Map<String, String>?,
+            ),
       },
     );
   }
