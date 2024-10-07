@@ -44,9 +44,9 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
             _buildExpandableCard(
               title: 'Project Overview',
               icon: Icons.description,
-              content: Column(
+              content: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text('Start Date: June 1, 2024'),
                   Text('End Date: December 15, 2024'),
                   Text('Status: In Progress'),
@@ -178,7 +178,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
             ],
           ),
           if (content != null) const SizedBox(height: 8),
-          if (content != null && (isExpanded || extraContent != null)) content!,
+          if (content != null && (isExpanded || extraContent != null)) content,
         ],
       ),
     );
@@ -188,9 +188,9 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Recent Activities',
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 18, // Matching dashboard font size
             fontWeight: FontWeight.bold,
             color: Colors.blueGrey, // Matching color scheme
@@ -210,7 +210,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
         children: [
-          Icon(Icons.check_circle_outline, color: Colors.blueGrey),
+          const Icon(Icons.check_circle_outline, color: Colors.blueGrey),
           const SizedBox(width: 8),
           Expanded(child: Text(activity)),
         ],

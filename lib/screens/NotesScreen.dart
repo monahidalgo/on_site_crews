@@ -16,8 +16,8 @@ class NotesScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextField(
-              decoration: const InputDecoration(
+            const TextField(
+              decoration: InputDecoration(
                 labelText: 'Add a note',
                 border: OutlineInputBorder(),
               ),

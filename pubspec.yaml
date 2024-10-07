@@ -1,38 +1,64 @@
 name: on_site_crews
 description: "A new Flutter project."
+
+# To publish the package to pub.dev, remove the 'none' and fill out the details if needed.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
+# App version
 version: 1.0.0+1
 
+# Dart SDK version
 environment:
   sdk: '>=3.4.4 <4.0.0'
 
+# Project dependencies
 dependencies:
   flutter:
     sdk: flutter
+
   cupertino_icons: ^1.0.6
-  geolocator: ^8.2.1
+
+  # Geolocation package for Flutter
+  geolocator: ^13.0.1
+
+  # Fluent UI system icons
   fluentui_system_icons: ^1.1.2
-  audioplayers: ^5.1.0
+
+  # Audio player package
+  audioplayers: ^6.1.0
+
+  # State management package
   provider: ^6.0.0
+
+  # Shared preferences for storing simple data
   shared_preferences: ^2.0.15
+
+  # Google Maps integration
   google_maps_flutter: ^2.2.0
-  image_picker_web: ^2.0.0
-  google_fonts: ^4.0.4
+
+  # Web support for image picker
+  image_picker_web: ^4.0.0
+
+  # Google Fonts for custom typography
+  google_fonts: ^6.2.1
+
+  # Smooth page indicators for swiping
   smooth_page_indicator: ^1.0.0  # Check for the latest version
 
-
-
-
+  # Image picker support
   image_picker: any
+
+# Dev dependencies for testing and linting
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^5.0.0
 
+# Flutter settings
 flutter:
   uses-material-design: true
 
+  # Assets used in the project
   assets:
     - assets/images/
     - assets/sounds/
