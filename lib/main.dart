@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// Import providers
 import 'package:on_site_crews/providers/materials_provider.dart';
 import 'package:on_site_crews/screens/NotesScreen.dart';
 import 'package:on_site_crews/screens/add_task_screen.dart';

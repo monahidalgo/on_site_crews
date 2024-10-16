@@ -1,25 +1,43 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
-class DashboardScreen extends StatelessWidget {
-  final AudioPlayer audioPlayer = AudioPlayer();
+class DashboardScreen extends StatefulWidget {
   final Map<String, String>? project;
 
-  DashboardScreen({super.key, this.project});
+  const DashboardScreen({super.key, this.project});
+
+  @override
+  _DashboardScreenState createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  late AudioPlayer audioPlayer;
+
+  @override
+  void initState() {
+    super.initState();
+    audioPlayer = AudioPlayer();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          ' ${project?['name'] ?? 'Project Tools'}',
+          ' ${widget.project?['name'] ?? 'Project Tools'}',
           style: const TextStyle(
             fontFamily: 'Roboto',
-            fontSize: 20, // Adjusted to keep consistent with other screens
+            fontSize: 20,
             fontWeight: FontWeight.w500,
           ),
         ),
-        backgroundColor: Colors.blueGrey, // Updated color to match the theme
+        backgroundColor: Colors.blueGrey,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -29,9 +47,9 @@ class DashboardScreen extends StatelessWidget {
             const Text(
               'Tools',
               style: TextStyle(
-                fontSize: 20, // Adjusted to match the other screens
+                fontSize: 20,
                 fontWeight: FontWeight.w500,
-                color: Colors.blueGrey, // Updated to match theme colors
+                color: Colors.blueGrey,
                 fontFamily: 'Roboto',
               ),
             ),
@@ -95,8 +113,9 @@ class DashboardScreen extends StatelessWidget {
   Widget _buildDashboardCard(BuildContext context, String title, IconData icon,
       Color color, String route) {
     return GestureDetector(
-      onTap: () {
-        audioPlayer.play(AssetSource('assets/sounds/buttonclick-1.wav'));
+      onTap: () async {
+        await audioPlayer.setAsset('assets/sounds/buttonclick-1.wav');
+        await audioPlayer.play();
         Navigator.pushNamed(context, route);
       },
       child: Card(
@@ -108,7 +127,7 @@ class DashboardScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 50, color: color), // Updated size for consistency
+            Icon(icon, size: 50, color: color),
             const SizedBox(height: 10),
             Text(
               title,

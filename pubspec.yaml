@@ -17,36 +17,44 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.6
+  cupertino_icons_web: ^1.0.6 # or the latest version
 
   # Geolocation package for Flutter
   geolocator: ^13.0.1
+  geolocator_web: ^3.0.0 # or the latest version
 
   # Fluent UI system icons
   fluentui_system_icons: ^1.1.2
+  fluentui_system_icons_web: ^1.1.2 # or the latest version
 
   # Audio player package
-  audioplayers: ^6.1.0
+  just_audio: ^0.9.32 # or the latest version
+  just_audio_web: ^0.9.32 # or the latest version
 
   # State management package
   provider: ^6.0.0
+  provider_web: ^6.0.0 # or the latest version
 
   # Shared preferences for storing simple data
   shared_preferences: ^2.0.15
+  shared_preferences_web: ^2.0.15 # or the latest version
 
   # Google Maps integration
   google_maps_flutter: ^2.2.0
+  google_maps_flutter_web: ^0.4.0 # or the latest version
 
   # Web support for image picker
   image_picker_web: ^4.0.0
 
-  # Google Fonts for custom typography
-  google_fonts: ^6.2.1
+  # Google Fonts for custom typography google_fonts and google fonts web removed
+  #google_fonts: ^6.2.1
+  #google_fonts_web: ^6.2.1 # or the latest version
 
-  # Smooth page indicators for swiping
-  smooth_page_indicator: ^1.0.0  # Check for the latest version
+  # Smooth page indicators for swiping removed
+
 
   # Image picker support
-  image_picker: any
+  image_picker: ^0.8.5+3 # or the latest version
 
 # Dev dependencies for testing and linting
 dev_dependencies:
