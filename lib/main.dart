@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:on_site_crews/providers/materials_provider.dart';
-import 'package:on_site_crews/screens/NotesScreen.dart';
+import 'package:on_site_crews/screens/notes_screen.dart';
 import 'package:on_site_crews/screens/add_task_screen.dart';
 import 'package:on_site_crews/screens/chat_screen.dart';
 import 'package:on_site_crews/screens/create_account_screen.dart';
@@ -10,7 +10,7 @@ import 'package:on_site_crews/screens/dashboard_screen.dart';
 import 'package:on_site_crews/screens/document_management_screen.dart';
 import 'package:on_site_crews/screens/employee_management_screen.dart';
 import 'package:on_site_crews/screens/gallery_screen.dart';
-import 'package:on_site_crews/screens/gettingstarted.dart';
+import 'package:on_site_crews/screens/getting_started_screen.dart';
 import 'package:on_site_crews/screens/login_screen.dart';
 import 'package:on_site_crews/screens/materials_screen.dart';
 import 'package:on_site_crews/screens/notifications_screen.dart';

@@ -61,10 +61,15 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+# Firebase dependencies
+  firebase_core: ^2.15.0
+  firebase_auth: ^4.7.2
+  cloud_firestore: ^4.8.4
 
 # Flutter settings
 flutter:
   uses-material-design: true
+
 
   # Assets used in the project
   assets:
