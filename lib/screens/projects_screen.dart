@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:on_site_crews/screens/create_project_screen.dart';
-import 'package:on_site_crews/screens/profile_screen.dart'; // Import ProfileScreen
 import 'package:on_site_crews/screens/project_detail_screen.dart';
+import 'package:on_site_crews/screens/profile_screen.dart'; // Import ProfileScreen
 
 class ProjectsScreen extends StatefulWidget {
   const ProjectsScreen({super.key});
@@ -13,15 +13,11 @@ class ProjectsScreen extends StatefulWidget {
 class _ProjectsScreenState extends State<ProjectsScreen> {
   // Updated projects list with sections
   List<Map<String, String>> projects = [
-    {
-      'name': 'Sherman Oaks Galleria Mall',
-      'description': 'Bring in H Salt inside'
-    },
+    {'name': 'Sherman Oaks Galleria Mall', 'description': 'Bring in H Salt inside'},
     {'name': 'Bilt Soft', 'description': 'Media Offices'},
-    {'name': 'Del taco', 'description': 'Renovate'},
+    {'name': 'Del Taco', 'description': 'Renovate'},
     {'name': 'Disney Studios', 'description': 'Renovate'},
     {'name': 'Hospital Apps and Websites', 'description': 'Development'},
-    {'name': 'Santa Monica Fish Market', 'description': 'Sea food sales'},
   ];
 
   // Customizable color for the background
@@ -49,14 +45,12 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          ProjectDetailsScreen(project: project),
+                      builder: (context) => ProjectDetailsScreen(project: project),
                     ),
                   );
                 },
                 child: Container(
-                  margin: const EdgeInsets.symmetric(
-                      vertical: 6.0, horizontal: 14.0),
+                  margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 14.0),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(6.0),
