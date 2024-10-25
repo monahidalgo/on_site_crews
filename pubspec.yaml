@@ -41,7 +41,7 @@ dependencies:
 
   # Google Maps integration
   google_maps_flutter: ^2.2.0
-  google_maps_flutter_web: ^0.4.0 # or the latest version
+  google_maps_flutter_web: ^0.5.10 # or the latest version
 
   # Web support for image picker
   image_picker_web: ^4.0.0
@@ -53,8 +53,12 @@ dependencies:
   # Smooth page indicators for swiping removed
   smooth_page_indicator: ^1.2.0+3
 
+
+  flutter_plugin_android_lifecycle: ^2.0.23 # or the latest version
+
+
   # Image picker support
-  image_picker: ^0.8.5+3 # or the latest version
+  image_picker: ^1.1.2 # or the latest version
 
 # Dev dependencies for testing and linting
 dev_dependencies:
@@ -62,9 +66,9 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^5.0.0
 # Firebase dependencies
-  firebase_core: ^2.15.0
-  firebase_auth: ^4.7.2
-  cloud_firestore: ^4.8.4
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
 
 # Flutter settings
 flutter:

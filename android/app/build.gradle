@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral() // Replace jcenter() with mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.4.2'
+        // Other dependencies for plugins or libraries used in the build
+    }
+}
+
 plugins {
     id "com.android.application"
     id "kotlin-android"
@@ -22,12 +33,12 @@ android {
     compileSdk 34
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 
     sourceSets {
@@ -36,7 +47,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.on_site_crews"
-        minSdk 21
+        minSdk 23
         targetSdk 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -54,5 +65,5 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version" // Access kotlin_version directly
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version" // Updated to jdk8
 }
