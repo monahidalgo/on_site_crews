@@ -1,11 +1,10 @@
 buildscript {
     repositories {
         google()
-        mavenCentral() // Replace jcenter() with mavenCentral()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.4.2'
-        // Other dependencies for plugins or libraries used in the build
     }
 }
 
@@ -15,7 +14,7 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
-ext.kotlin_version = '1.8.21' // Define kotlin_version here at the top
+ext.kotlin_version = '1.8.21' // Define kotlin_version at the top
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file("local.properties")
@@ -65,5 +64,5 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version" // Updated to jdk8
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version" // Using JDK 8 standard library
 }
