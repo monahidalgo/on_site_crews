@@ -60,7 +60,7 @@ For inquiries or to discuss mobile app development needs, please reach out:
 - **LinkedIn**: Mona Hidalgo
 - **Twitter**: @MonaHidalgo1
 
-**Bilt Soft**  
+**Biltsoft**  
 **Owner**: Mona Hidalgo
 
 - Dashboard image of Project Tools
