@@ -11,91 +11,160 @@ class ProjectsScreen extends StatefulWidget {
 }
 
 class _ProjectsScreenState extends State<ProjectsScreen> {
-  // Updated projects list with sections
   List<Map<String, String>> projects = [
-    {'name': 'Sherman Oaks Galleria Mall', 'description': 'Bring in H Salt inside'},
-    {'name': 'Bilt Soft', 'description': 'Media Offices'},
+    {'name': 'H Salt - Fish & Chips', 'description': 'Bring in H Salt inside'},
+    {'name': 'Biltsoft', 'description': 'Media Offices'},
     {'name': 'Del Taco', 'description': 'Renovate'},
     {'name': 'Disney Studios', 'description': 'Renovate'},
-    {'name': 'Hospital Apps and Websites', 'description': 'Development'},
+    {'name': 'Safeway', 'description': 'Concrete Work'},
+    {'name': 'Cafe Rouge', 'description': 'Renovate'},
+    {'name': 'Rustic Barn', 'description': 'Renovate'},
+    {'name': 'Dunkin Donuts', 'description': 'Renovate'},
+    {'name': 'Bakeries', 'description': 'Renovate'},
+    {'name': 'Target', 'description': 'Renovate'},
+    {'name': 'CVS Pharmacy', 'description': 'Renovate'},
+    {'name': 'Walmart', 'description': 'Renovate'}, // Add more projects
+    {'name': 'Home Depot', 'description': 'Renovate'},
+    {'name': 'Lowe\'s', 'description': 'Renovate'},
+    {'name': 'Target', 'description': 'Renovate'},
+    {'name': 'Walmart Beverages', 'description': 'Renovate'},
+    {'name': 'CVS Pharmacy', 'description': 'Renovate'},
   ];
 
   // Customizable color for the background
-  final Color _backgroundColor = Colors.grey[400]!; // Neutral dark background
+  final Color _backgroundColor = Colors.grey[300]!; // Neutral dark background
+  List<Map<String, String>> filteredProjects = [];
+  String searchQuery = '';
+
+  @override
+  void initState() {
+    super.initState();
+    filteredProjects = projects; // Initialize filteredProjects
+  }
+
+  void _filterProjects(String query) {
+    if (query.isNotEmpty) {
+      filteredProjects = projects
+          .where((project) => project['name']!.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    } else {
+      filteredProjects = projects; // Reset to original list
+    }
+    setState(() {
+      searchQuery = query;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Projects', style: TextStyle(fontFamily: 'Roboto')),
-        backgroundColor: Colors.blueGrey, // Neutral dark color for the app bar
+        backgroundColor: Colors.orange[900], // Neutral dark color for the app bar
         automaticallyImplyLeading: false, // Removes the top left arrow
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.mic), // Microphone icon
+            onPressed: () {
+              // Add microphone action
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.list), // List icon
+            onPressed: () {
+              // Add list action
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.download), // Download icon
+            onPressed: () {
+              // Add download action
+            },
+          ),
+        ],
       ),
       body: Container(
         color: _backgroundColor,
         child: SafeArea(
-          child: ListView.builder(
-            itemCount: projects.length,
-            itemBuilder: (context, index) {
-              final project = projects[index];
-              final color = _getProjectColor(project['name']!);
-
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProjectDetailsScreen(project: project),
-                    ),
-                  );
-                },
-                child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 14.0),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(6.0),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black38,
-                        blurRadius: 2.0,
-                        spreadRadius: 1.0,
-                        offset: Offset(1.0, 1.0),
-                      ),
-                    ],
-                  ),
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.all(12.0),
-                    leading: CircleAvatar(
-                      backgroundColor: color,
-                      child: Text(
-                        project['name']![0],
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Roboto',
-                        ),
-                      ),
-                    ),
-                    title: Text(
-                      project['name']!,
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Roboto',
-                      ),
-                    ),
-                    subtitle: Text(
-                      project['description']!,
-                      style: const TextStyle(
-                        fontSize: 12.0,
-                        color: Colors.grey,
-                        fontFamily: 'Roboto',
-                      ),
-                    ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  onChanged: _filterProjects,
+                  decoration: InputDecoration(
+                    hintText: 'Search projects...',
+                    border: const OutlineInputBorder(),
+                    prefixIcon: const Icon(Icons.search),
                   ),
                 ),
-              );
-            },
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: filteredProjects.length,
+                  itemBuilder: (context, index) {
+                    final project = filteredProjects[index];
+                    final color = _getProjectColor(project['name']!);
+
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProjectDetailsScreen(project: project),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 14.0),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(6.0),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black38,
+                              blurRadius: 2.0,
+                              spreadRadius: 1.0,
+                              offset: Offset(1.0, 1.0),
+                            ),
+                          ],
+                        ),
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.all(12.0),
+                          leading: CircleAvatar(
+                            backgroundColor: color,
+                            child: Text(
+                              project['name']![0],
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Roboto',
+                              ),
+                            ),
+                          ),
+                          title: Text(
+                            project['name']!,
+                            style: const TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Roboto',
+                            ),
+                          ),
+                          subtitle: Text(
+                            project['description']!,
+                            style: const TextStyle(
+                              fontSize: 12.0,
+                              color: Colors.grey,
+                              fontFamily: 'Roboto',
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -112,6 +181,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
             setState(() {
               // Add the new project to the end of the list
               projects.add(newProject);
+              _filterProjects(searchQuery); // Reapply filter
             });
           }
         },
