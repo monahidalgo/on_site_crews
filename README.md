@@ -1,6 +1,6 @@
 # On-Site Crews: A Flutter Construction Site Management App
 
-On-Site Crews is a mobile application built with Flutter, designed to bring efficiency and transparency to construction site management. This app empowers Owners, Crews, Teams, and Contractors to stay connected and organized throughout a project's lifecycle.
+On-Site Crews is a mobile application built with Flutter + Dart, it's designed to bring efficiency and transparency to construction site management. This app empowers Owners, Crews, Teams, and Contractors to stay connected and organized throughout a project's lifecycle.
 
 ## Features (Under Development & Future Planning)
 
@@ -63,9 +63,15 @@ For inquiries or to discuss mobile app development needs, please reach out:
 **Biltsoft**  
 **Owner**: Mona Hidalgo
 
-- Dashboard image of Project Tools
-<img src="https://github.com/user-attachments/assets/7e257e69-0688-4319-b989-f668fa20057f" alt="Logo" style="width: 250px; height: auto;">
-<img src="https://github.com/user-attachments/assets/92e4185c-54b2-41e0-9c97-431b76a93b11" alt="Logo" style="width: 250px; height: auto;">
+- Login logo images 
+- All logo design by Mona Hidalgo. 
+<img src="https://github.com/user-attachments/assets/7e257e69-0688-4319-b989-f668fa20057f" alt="Logo" style="width: 200px; height: auto;">
+<img src="https://github.com/user-attachments/assets/92e4185c-54b2-41e0-9c97-431b76a93b11" alt="Logo" style="width: 200px; height: auto;">
+<img src="https://github.com/user-attachments/assets/1667022b-2540-429d-b690-d5d69595d5fe" alt="Logo" style="width: 200px; height: auto;">
+<img src="https://github.com/user-attachments/assets/71fb8ca6-55fb-479b-8b90-2ac81bd0beeb" alt="Logo" style="width: 200px; height: auto;">
+
+
+
 
 
 
