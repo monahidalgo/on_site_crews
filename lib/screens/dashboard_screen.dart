@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
 
 class DashboardScreen extends StatefulWidget {
   final Map<String, String>? project;
@@ -11,17 +10,13 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  late AudioPlayer audioPlayer;
-
   @override
   void initState() {
     super.initState();
-    audioPlayer = AudioPlayer();
   }
 
   @override
   void dispose() {
-    audioPlayer.dispose();
     super.dispose();
   }
 
@@ -37,7 +32,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.orange[900]!,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -113,9 +108,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget _buildDashboardCard(BuildContext context, String title, IconData icon,
       Color color, String route) {
     return GestureDetector(
-      onTap: () async {
-        await audioPlayer.setAsset('assets/sounds/buttonclick-1.wav');
-        await audioPlayer.play();
+      onTap: () {
         Navigator.pushNamed(context, route);
       },
       child: Card(
