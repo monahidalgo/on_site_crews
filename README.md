@@ -75,4 +75,4 @@ For inquiries or to discuss mobile app development needs, please reach out:
 
 
 
-Bilt Soft is committed to delivering a powerful, user-friendly construction site management solution. Stay tuned for updates and the upcoming release!
+Biltsoft is committed to delivering a powerful, user-friendly construction site management solution. Stay tuned for updates and the upcoming release!
