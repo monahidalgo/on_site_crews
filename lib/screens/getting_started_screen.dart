@@ -76,7 +76,7 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
                   Navigator.pushReplacementNamed(context, '/login');
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueGrey,
+                  backgroundColor: Colors.lightBlue[400],
                   padding: const EdgeInsets.symmetric(
                       vertical: 12.0, horizontal: 40.0),
                 ),

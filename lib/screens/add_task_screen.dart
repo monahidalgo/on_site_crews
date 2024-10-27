@@ -6,31 +6,43 @@ class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Task'),
-      ),
+      appBar: AppBar(title: const Text('Add Task')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            const TextField(
-              decoration: InputDecoration(labelText: 'Task Name'),
+            TextField(
+              decoration: InputDecoration(labelText: 'Task Title'),
             ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Description'),
+            DropdownButtonFormField<String>(
+              decoration: const InputDecoration(labelText: 'Status'),
+              items: const [
+                DropdownMenuItem(value: 'Open', child: Text('Open')),
+                DropdownMenuItem(value: 'In Progress', child: Text('In Progress')),
+                DropdownMenuItem(value: 'Completed', child: Text('Completed')),
+              ],
+              onChanged: (value) {},
             ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Assigned To'),
+            TextField(
+              decoration: const InputDecoration(labelText: 'Assignee'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                // Save task logic
-                Navigator.pop(context);
-              },
-              child: const Text('Save Task'),
+            TextField(
+              decoration: const InputDecoration(labelText: 'Due Date', hintText: 'YYYY-MM-DD'),
+              keyboardType: TextInputType.datetime,
+            ),
+            TextField(
+              maxLines: 3,
+              decoration: const InputDecoration(labelText: 'Description'),
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Task saving logic here
+        },
+        label: const Text('Add Task'),
+        icon: const Icon(Icons.add),
       ),
     );
   }
