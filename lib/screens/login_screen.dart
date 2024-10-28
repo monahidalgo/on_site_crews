@@ -18,8 +18,8 @@ class LoginScreen extends StatelessWidget {
             left: 0,
             right: 0,
             child: Image.asset(
-              'assets/images/osclogo.png',
-              height: 500, // Adjust height to fit the background
+              'assets/images/onsitelogo3.png',
+              height: 370, // Adjust height to fit the background
               fit: BoxFit.cover,
             ),
           ),
@@ -43,7 +43,7 @@ class LoginScreen extends StatelessWidget {
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    const SizedBox(height: 16.0),
+                    const SizedBox(height: 10.0),
                     // Password field
                     TextFormField(
                       controller: _passwordController,
@@ -65,12 +65,12 @@ class LoginScreen extends StatelessWidget {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueGrey,
+                        backgroundColor: Colors.blue[400],
                         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 40.0),
                       ),
                       child: const Text(
                         'Login',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        style: TextStyle(color: Colors.white, fontSize: 14),
                       ),
                     ),
                     const SizedBox(height: 10.0),
@@ -91,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                       children: [
                         const Text(
                           "Don't have an account? ",
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(fontSize: 14),
                         ),
                         TextButton(
                           onPressed: () {
@@ -100,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                           child: const Text(
                             "Create Account",
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 14,
                               color: Colors.red,
                             ),
                           ),
