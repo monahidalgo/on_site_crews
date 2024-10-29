@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget {
             right: 0,
             child: Image.asset(
               'assets/images/onsitelogo3.png',
-              height: 370, // Adjust height to fit the background
+              height: 450, // Adjust height to fit the background
               fit: BoxFit.cover,
             ),
           ),
