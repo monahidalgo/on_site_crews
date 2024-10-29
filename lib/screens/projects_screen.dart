@@ -196,7 +196,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   Widget _buildBottomAppBar() {
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
-      color: Colors.grey[850],
+      color: Colors.orange[400],
       child: IconTheme(
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         child: Row(
