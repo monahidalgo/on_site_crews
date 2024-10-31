@@ -9,7 +9,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,  // Prevent the screen from resizing when the keyboard appears
+      resizeToAvoidBottomInset:
+          false, // Prevent the screen from resizing when the keyboard appears
       body: Stack(
         children: [
           // Background logo
@@ -18,7 +19,7 @@ class LoginScreen extends StatelessWidget {
             left: 0,
             right: 0,
             child: Image.asset(
-              'assets/images/onsitelogo3.png',
+              'assets/images/osclogo.png',
               height: 450, // Adjust height to fit the background
               fit: BoxFit.cover,
             ),
@@ -27,7 +28,8 @@ class LoginScreen extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 30), // Padding to avoid overflow
+              padding: const EdgeInsets.fromLTRB(
+                  20, 0, 20, 30), // Padding to avoid overflow
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 400),
                 child: Column(
@@ -39,7 +41,8 @@ class LoginScreen extends StatelessWidget {
                       decoration: const InputDecoration(
                         labelText: 'Username',
                         filled: true,
-                        fillColor: Colors.white70, // Slightly transparent background
+                        fillColor:
+                            Colors.white70, // Slightly transparent background
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -50,7 +53,8 @@ class LoginScreen extends StatelessWidget {
                       decoration: const InputDecoration(
                         labelText: 'Password',
                         filled: true,
-                        fillColor: Colors.white70, // Slightly transparent background
+                        fillColor:
+                            Colors.white70, // Slightly transparent background
                         border: OutlineInputBorder(),
                       ),
                       obscureText: true,
@@ -66,7 +70,8 @@ class LoginScreen extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue[400],
-                        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 40.0),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12.0, horizontal: 40.0),
                       ),
                       child: const Text(
                         'Login',
