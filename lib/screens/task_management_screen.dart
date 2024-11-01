@@ -71,9 +71,9 @@ class TaskManagementScreen extends StatelessWidget {
         onPressed: () {
           Navigator.pushNamed(context, '/add_task');
         },
-        backgroundColor: Colors.blue, // Set the background color to blue
+        backgroundColor: Colors.blue,
+        tooltip: 'Add Task', // Set the background color to blue
         child: const Icon(Icons.add),
-        tooltip: 'Add Task',
       ),
     );
   }

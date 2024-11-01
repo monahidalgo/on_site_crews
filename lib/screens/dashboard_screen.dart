@@ -32,7 +32,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        backgroundColor: Colors.orange[900]!,
+        backgroundColor: Colors.blue[100],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -125,7 +125,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Text(
               title,
               style: const TextStyle(
-                color: Colors.blueGrey,
+                color: Colors.blue,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 fontFamily: 'Roboto',

@@ -97,7 +97,7 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.blue,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -181,7 +181,7 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
                     onPressed: _createProject,
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      backgroundColor: Colors.blueGrey,
+                      backgroundColor: Colors.blue,
                       padding: const EdgeInsets.symmetric(vertical: 12.0),
                       textStyle: const TextStyle(fontSize: 16),
                     ),

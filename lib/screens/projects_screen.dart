@@ -32,7 +32,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   ];
 
   // Customizable color for the background
-  final Color _backgroundColor = Colors.grey[300]!; // Neutral dark background
+  final Color _backgroundColor = Colors.white!; // Neutral dark background
   List<Map<String, String>> filteredProjects = [];
   String searchQuery = '';
 
@@ -60,7 +60,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Projects', style: TextStyle(fontFamily: 'Roboto')),
-        backgroundColor: Colors.orange[900], // Neutral dark color for the app bar
+        backgroundColor: Colors.blue[100], // Neutral dark color for the app bar
         automaticallyImplyLeading: false, // Removes the top left arrow
         actions: [
           IconButton(
@@ -186,7 +186,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
           }
         },
         tooltip: 'Create Project',
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.blue,
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: _buildBottomAppBar(),
@@ -196,7 +196,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   Widget _buildBottomAppBar() {
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
-      color: Colors.orange[400],
+      color: Colors.black54,
       child: IconTheme(
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         child: Row(
