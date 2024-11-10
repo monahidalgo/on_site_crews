@@ -11,8 +11,9 @@ class ProjectDetailsScreen extends StatefulWidget {
 
 class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
   bool isOverviewExpanded = false;
-
-  get extraContent => null;
+  int timeCardCount = 3; // Badge count for time cards
+  int galleryCount = 7; // Badge count for gallery
+  int reportCount = 2; // Badge count for reports
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +23,11 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
           widget.project?['name'] ?? 'Project Details',
           style: const TextStyle(
             fontFamily: 'Roboto',
-            fontSize: 20, // Matching dashboard font size
-            fontWeight: FontWeight.w500,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
           ),
         ),
-        backgroundColor: Colors.deepOrange, // Matching dashboard color
+        backgroundColor: Colors.orangeAccent,
         actions: [
           IconButton(
             icon: const Icon(Icons.close),
@@ -40,26 +41,24 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            // Project Overview Section (Expandable)
             _buildExpandableCard(
               title: 'Project Overview',
               icon: Icons.description,
-              content: const Column(
+              content: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Start Date: June 1, 2024'),
                   Text('End Date: December 15, 2024'),
                   Text('Status: In Progress'),
-                  SizedBox(height: 10),
-                  // Progress Bar
+                  const SizedBox(height: 10),
                   Text('Completion:'),
-                  LinearProgressIndicator(value: 0.6), // 60% complete
+                  LinearProgressIndicator(value: 0.6),
                 ],
               ),
             ),
             const SizedBox(height: 20),
 
-            // Notes Section
+            // Project Notes Section
             _buildClickableCard(
               title: 'Project Notes',
               icon: Icons.note_alt,
@@ -70,30 +69,32 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
             ),
             const SizedBox(height: 20),
 
-            // File Upload Section
+            // Project Tools Section with Badge for Time Cards, Gallery, and Reports
             _buildClickableCard(
-              title: 'File Uploads',
-              icon: Icons.upload_file,
+              title: 'Add Project Tools',
+              icon: Icons.file_open_outlined,
               onTap: () {
-                // Implement file upload logic
+                Navigator.pushNamed(context, '/dashboard',
+                    arguments: widget.project);
               },
+              extraContent: _buildBadges(),
             ),
             const SizedBox(height: 20),
 
-            // Recent Activity Log
             _buildActivityLog(),
           ],
         ),
       ),
 
-      // Floating Action Button for Add Project Tools
-      floatingActionButton: FloatingActionButton.extended(
+      // Floating Action Button to add time card
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/dashboard', arguments: widget.project);
+          setState(() {
+            timeCardCount++;
+          });
         },
-        label: const Text('Add Project Tools'),
-        icon: const Icon(Icons.build),
-        backgroundColor: Colors.blueGrey, // Consistent with dashboard theme
+        child: const Icon(Icons.access_alarm),
+        backgroundColor: Colors.blueGrey[100],
       ),
     );
   }
@@ -126,10 +127,20 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
   }) {
     return GestureDetector(
       onTap: onTap,
-      child: _buildCard(
-        title: title,
-        icon: icon,
-        content: extraContent,
+      child: Stack(
+        children: [
+          _buildCard(
+            title: title,
+            icon: icon,
+            content: null, // No content by default
+          ),
+          if (extraContent != null)
+            Positioned(
+              right: 16, // Adjust this to position the badges correctly
+              top: 16,
+              child: extraContent,
+            ),
+        ],
       ),
     );
   }
@@ -155,19 +166,18 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(icon, size: 24, color: Colors.blueGrey), // Same icon color
+              Icon(icon, size: 24, color: Colors.orange),
               const SizedBox(width: 10),
               Text(
                 title,
                 style: const TextStyle(
-                  fontSize: 16, // Matching dashboard card text
-                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                   fontFamily: 'Roboto',
-                  color: Colors.blueGrey, // Matching color scheme
+                  color: Colors.blueGrey,
                 ),
               ),
               const Spacer(),
@@ -177,9 +187,38 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                 const Icon(Icons.keyboard_arrow_up),
             ],
           ),
-          if (content != null) const SizedBox(height: 8),
-          if (content != null && (isExpanded || extraContent != null)) content,
+          if (content != null && isExpanded) ...[
+            const SizedBox(height: 8),
+            content,
+          ],
         ],
+      ),
+    );
+  }
+
+  Widget _buildBadges() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _buildBadge(timeCardCount, Colors.red),
+        const SizedBox(width: 8),
+        _buildBadge(galleryCount, Colors.green),
+        const SizedBox(width: 8),
+        _buildBadge(reportCount, Colors.blue),
+      ],
+    );
+  }
+
+  Widget _buildBadge(int count, Color color) {
+    return CircleAvatar(
+      radius: 12,
+      backgroundColor: color,
+      child: Text(
+        '$count',
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 12,
+        ),
       ),
     );
   }
@@ -191,9 +230,9 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
         const Text(
           'Recent Activities',
           style: TextStyle(
-            fontSize: 18, // Matching dashboard font size
+            fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Colors.blueGrey, // Matching color scheme
+            color: Colors.blueGrey,
             fontFamily: 'Roboto',
           ),
         ),
@@ -210,7 +249,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
         children: [
-          const Icon(Icons.check_circle_outline, color: Colors.blueGrey),
+          const Icon(Icons.check_circle_outline, color: Colors.orange),
           const SizedBox(width: 8),
           Expanded(child: Text(activity)),
         ],

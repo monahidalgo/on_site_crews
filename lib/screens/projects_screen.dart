@@ -108,14 +108,14 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                       ),
                       child: ListTile(
                         leading: Icon(
-                          Icons.build, // Construction-related icon
+                          Icons.file_copy_rounded, // Construction-related icon
                           color: Colors.orange,
-                          size: 40,
+                          size: 30,
                         ),
                         title: Text(
                           project['name']!,
                           style: const TextStyle(
-                            fontSize: 18.0,
+                            fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Roboto',
                           ),
@@ -164,7 +164,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   Widget _buildBottomAppBar() {
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
-      color: Colors.grey[900],
+      color: Colors.grey,
       child: IconTheme(
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         child: Row(
@@ -219,10 +219,10 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: Colors.white),
+          Icon(icon, color: Colors.black),
           Text(
             label,
-            style: TextStyle(color: Colors.white, fontFamily: 'Roboto'),
+            style: TextStyle(color: Colors.black, fontFamily: 'Roboto'),
           ),
         ],
       ),

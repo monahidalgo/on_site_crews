@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:on_site_crews/providers/materials_provider.dart';
-import 'package:on_site_crews/screens/notes_screen.dart';
 import 'package:on_site_crews/screens/add_task_screen.dart';
 import 'package:on_site_crews/screens/chat_screen.dart';
 import 'package:on_site_crews/screens/create_account_screen.dart';
@@ -13,6 +12,7 @@ import 'package:on_site_crews/screens/gallery_screen.dart';
 import 'package:on_site_crews/screens/getting_started_screen.dart';
 import 'package:on_site_crews/screens/login_screen.dart';
 import 'package:on_site_crews/screens/materials_screen.dart';
+import 'package:on_site_crews/screens/notes_screen.dart';
 import 'package:on_site_crews/screens/notifications_screen.dart';
 import 'package:on_site_crews/screens/profile_screen.dart';
 import 'package:on_site_crews/screens/project_detail_screen.dart';
@@ -68,8 +68,7 @@ class MyApp extends StatelessWidget {
         '/notes': (context) => const NotesScreen(),
         '/employee_management': (context) => const EmployeeManagementScreen(),
         '/project_detail': (context) => ProjectDetailsScreen(
-              project: ModalRoute.of(context)!.settings.arguments
-                  as Map<String, String>?,
+              project: {},
             ),
       },
     );

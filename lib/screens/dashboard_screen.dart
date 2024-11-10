@@ -105,6 +105,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
+  // Updated Dashboard Card
   Widget _buildDashboardCard(BuildContext context, String title, IconData icon,
       Color color, String route) {
     return GestureDetector(
@@ -120,8 +121,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 50, color: color),
-            const SizedBox(height: 10),
+            Container(
+              padding:
+                  const EdgeInsets.all(16.0), // Added padding around the icon
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: color
+                    .withOpacity(0.1), // Background color for the icon area
+              ),
+              child: Icon(icon, size: 50, color: color),
+            ),
+            const SizedBox(height: 8), // Space between the icon and the text
             Text(
               title,
               style: const TextStyle(
