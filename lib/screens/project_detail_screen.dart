@@ -26,7 +26,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        backgroundColor: Colors.orange[900], // Matching dashboard color
+        backgroundColor: Colors.deepOrange, // Matching dashboard color
         actions: [
           IconButton(
             icon: const Icon(Icons.close),

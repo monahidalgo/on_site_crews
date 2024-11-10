@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:on_site_crews/screens/create_project_screen.dart';
-import 'package:on_site_crews/screens/project_detail_screen.dart';
 import 'package:on_site_crews/screens/profile_screen.dart'; // Import ProfileScreen
+import 'package:on_site_crews/screens/project_detail_screen.dart';
 
 class ProjectsScreen extends StatefulWidget {
   const ProjectsScreen({super.key});
@@ -13,7 +13,10 @@ class ProjectsScreen extends StatefulWidget {
 class _ProjectsScreenState extends State<ProjectsScreen> {
   List<Map<String, String>> projects = [
     {'name': 'H Salt - Fish & Chips', 'description': 'Bring in H Salt inside'},
-    {'name': 'Biltsoft', 'description': 'Media Offices'},
+    {
+      'name': 'Del Amo Mall',
+      'description': 'Maintenance of the  project in the  '
+    },
     {'name': 'Del Taco', 'description': 'Renovate'},
     {'name': 'Disney Studios', 'description': 'Renovate'},
     {'name': 'Safeway', 'description': 'Concrete Work'},
@@ -45,7 +48,8 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   void _filterProjects(String query) {
     if (query.isNotEmpty) {
       filteredProjects = projects
-          .where((project) => project['name']!.toLowerCase().contains(query.toLowerCase()))
+          .where((project) =>
+              project['name']!.toLowerCase().contains(query.toLowerCase()))
           .toList();
     } else {
       filteredProjects = projects; // Reset to original list
@@ -60,7 +64,8 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Projects', style: TextStyle(fontFamily: 'Roboto')),
-        backgroundColor: Colors.blue[100], // Neutral dark color for the app bar
+        backgroundColor:
+            Colors.deepOrange, // Neutral dark color for the app bar
         automaticallyImplyLeading: false, // Removes the top left arrow
         actions: [
           IconButton(
@@ -111,12 +116,14 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ProjectDetailsScreen(project: project),
+                            builder: (context) =>
+                                ProjectDetailsScreen(project: project),
                           ),
                         );
                       },
                       child: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 14.0),
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 6.0, horizontal: 14.0),
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(6.0),
