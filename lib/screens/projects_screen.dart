@@ -13,36 +13,22 @@ class ProjectsScreen extends StatefulWidget {
 class _ProjectsScreenState extends State<ProjectsScreen> {
   List<Map<String, String>> projects = [
     {'name': 'H Salt - Fish & Chips', 'description': 'Bring in H Salt inside'},
-    {
-      'name': 'Del Amo Mall',
-      'description': 'Maintenance of the  project in the  '
-    },
+    {'name': 'Del Amo Mall', 'description': 'Maintenance of the project'},
     {'name': 'Del Taco', 'description': 'Renovate'},
     {'name': 'Disney Studios', 'description': 'Renovate'},
     {'name': 'Safeway', 'description': 'Concrete Work'},
     {'name': 'Cafe Rouge', 'description': 'Renovate'},
-    {'name': 'Rustic Barn', 'description': 'Renovate'},
-    {'name': 'Dunkin Donuts', 'description': 'Renovate'},
-    {'name': 'Bakeries', 'description': 'Renovate'},
-    {'name': 'Target', 'description': 'Renovate'},
-    {'name': 'CVS Pharmacy', 'description': 'Renovate'},
-    {'name': 'Walmart', 'description': 'Renovate'}, // Add more projects
-    {'name': 'Home Depot', 'description': 'Renovate'},
-    {'name': 'Lowe\'s', 'description': 'Renovate'},
-    {'name': 'Target', 'description': 'Renovate'},
-    {'name': 'Walmart Beverages', 'description': 'Renovate'},
-    {'name': 'CVS Pharmacy', 'description': 'Renovate'},
+    // More projects
   ];
 
-  // Customizable color for the background
-  final Color _backgroundColor = Colors.white!; // Neutral dark background
+  final Color _backgroundColor = Colors.grey[100]!;
   List<Map<String, String>> filteredProjects = [];
   String searchQuery = '';
 
   @override
   void initState() {
     super.initState();
-    filteredProjects = projects; // Initialize filteredProjects
+    filteredProjects = projects;
   }
 
   void _filterProjects(String query) {
@@ -52,7 +38,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
               project['name']!.toLowerCase().contains(query.toLowerCase()))
           .toList();
     } else {
-      filteredProjects = projects; // Reset to original list
+      filteredProjects = projects;
     }
     setState(() {
       searchQuery = query;
@@ -64,115 +50,91 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Projects', style: TextStyle(fontFamily: 'Roboto')),
-        backgroundColor:
-            Colors.deepOrange, // Neutral dark color for the app bar
-        automaticallyImplyLeading: false, // Removes the top left arrow
+        backgroundColor: Colors.orange[700],
         actions: [
           IconButton(
-            icon: const Icon(Icons.mic), // Microphone icon
+            icon: const Icon(Icons.search),
             onPressed: () {
-              // Add microphone action
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.list), // List icon
-            onPressed: () {
-              // Add list action
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.download), // Download icon
-            onPressed: () {
-              // Add download action
+              showSearch(context: context, delegate: CustomSearchDelegate());
             },
           ),
         ],
       ),
-      body: Container(
-        color: _backgroundColor,
-        child: SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  onChanged: _filterProjects,
-                  decoration: InputDecoration(
-                    hintText: 'Search projects...',
-                    border: const OutlineInputBorder(),
-                    prefixIcon: const Icon(Icons.search),
-                  ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                onChanged: _filterProjects,
+                decoration: InputDecoration(
+                  hintText: 'Search projects...',
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.search),
+                  fillColor: Colors.white,
+                  filled: true,
                 ),
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: filteredProjects.length,
-                  itemBuilder: (context, index) {
-                    final project = filteredProjects[index];
-                    final color = _getProjectColor(project['name']!);
-
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ProjectDetailsScreen(project: project),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 6.0, horizontal: 14.0),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(6.0),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black38,
-                              blurRadius: 2.0,
-                              spreadRadius: 1.0,
-                              offset: Offset(1.0, 1.0),
-                            ),
-                          ],
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: filteredProjects.length,
+                itemBuilder: (context, index) {
+                  final project = filteredProjects[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ProjectDetailsScreen(project: project),
                         ),
-                        child: ListTile(
-                          contentPadding: const EdgeInsets.all(12.0),
-                          leading: CircleAvatar(
-                            backgroundColor: color,
-                            child: Text(
-                              project['name']![0],
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Roboto',
-                              ),
-                            ),
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 12.0),
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 5.0,
+                            offset: Offset(2.0, 2.0),
                           ),
-                          title: Text(
-                            project['name']!,
-                            style: const TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Roboto',
-                            ),
+                        ],
+                      ),
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.build, // Construction-related icon
+                          color: Colors.orange,
+                          size: 40,
+                        ),
+                        title: Text(
+                          project['name']!,
+                          style: const TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Roboto',
                           ),
-                          subtitle: Text(
-                            project['description']!,
-                            style: const TextStyle(
-                              fontSize: 12.0,
-                              color: Colors.grey,
-                              fontFamily: 'Roboto',
-                            ),
+                        ),
+                        subtitle: Text(
+                          project['description']!,
+                          style: const TextStyle(
+                            fontSize: 14.0,
+                            color: Colors.grey,
+                            fontFamily: 'Roboto',
                           ),
                         ),
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -186,14 +148,13 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
 
           if (newProject != null) {
             setState(() {
-              // Add the new project to the end of the list
               projects.add(newProject);
-              _filterProjects(searchQuery); // Reapply filter
+              _filterProjects(searchQuery);
             });
           }
         },
         tooltip: 'Create Project',
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.orange[700],
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: _buildBottomAppBar(),
@@ -203,7 +164,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   Widget _buildBottomAppBar() {
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
-      color: Colors.black54,
+      color: Colors.grey[900],
       child: IconTheme(
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         child: Row(
@@ -212,31 +173,27 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
             _buildBottomNavIcon(
               icon: Icons.home,
               label: 'Home',
-              color: Colors.white,
               onTap: () {
-                // Add navigation logic for Home
+                // Home navigation
               },
             ),
             _buildBottomNavIcon(
               icon: Icons.assignment,
-              label: 'Activity',
-              color: Colors.white,
+              label: 'Tasks',
               onTap: () {
-                // Add navigation logic for Activity
+                // Tasks navigation
               },
             ),
             _buildBottomNavIcon(
               icon: Icons.chat,
               label: 'Chat',
-              color: Colors.white,
               onTap: () {
-                // Add navigation logic for Chat
+                // Chat navigation
               },
             ),
             _buildBottomNavIcon(
               icon: Icons.account_circle_outlined,
               label: 'Account',
-              color: Colors.white,
               onTap: () {
                 Navigator.push(
                   context,
@@ -255,7 +212,6 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   Widget _buildBottomNavIcon({
     required IconData icon,
     required String label,
-    required Color color,
     required VoidCallback onTap,
   }) {
     return GestureDetector(
@@ -263,30 +219,51 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            icon,
-            color: color,
-          ),
+          Icon(icon, color: Colors.white),
           Text(
             label,
-            style: TextStyle(color: color, fontFamily: 'Roboto'),
+            style: TextStyle(color: Colors.white, fontFamily: 'Roboto'),
           ),
         ],
       ),
     );
   }
+}
 
-  Color _getProjectColor(String name) {
-    final colors = [
-      Colors.red,
-      Colors.blue,
-      Colors.green,
-      Colors.orange,
-      Colors.purple,
-      Colors.teal,
-      Colors.cyan,
-      Colors.amber,
-    ];
-    return colors[name.codeUnitAt(0) % colors.length];
+class CustomSearchDelegate extends SearchDelegate {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [IconButton(icon: Icon(Icons.clear), onPressed: () => query = '')];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () => close(context, null),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // Add search result handling
+    return Container();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggestions = [
+      'Del Taco',
+      'Disney Studios',
+      'Target'
+    ]; // Example suggestions
+    return ListView.builder(
+      itemCount: suggestions.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(suggestions[index]),
+        );
+      },
+    );
   }
 }

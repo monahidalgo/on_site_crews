@@ -125,7 +125,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Text(
               title,
               style: const TextStyle(
-                color: Colors.blue,
+                color: Colors.black,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 fontFamily: 'Roboto',
