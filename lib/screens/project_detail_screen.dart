@@ -93,8 +93,8 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
             timeCardCount++;
           });
         },
-        child: const Icon(Icons.access_alarm),
         backgroundColor: Colors.blueGrey[100],
+        child: const Icon(Icons.access_alarm),
       ),
     );
   }

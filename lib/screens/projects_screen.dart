@@ -108,7 +108,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                       ),
                       child: ListTile(
                         leading: Icon(
-                          Icons.file_copy_rounded, // Construction-related icon
+                          Icons.file_copy_outlined, // Construction-related icon
                           color: Colors.orange,
                           size: 30,
                         ),
@@ -164,7 +164,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   Widget _buildBottomAppBar() {
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
-      color: Colors.grey,
+      color: Colors.orange,
       child: IconTheme(
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         child: Row(

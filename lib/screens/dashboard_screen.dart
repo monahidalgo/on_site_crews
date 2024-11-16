@@ -32,7 +32,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        backgroundColor: Colors.blue[100],
+        backgroundColor: Colors.orange,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
